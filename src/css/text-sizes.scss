@@ -1,0 +1,12 @@
+
+
+$text-sizes:10, 12, 14, 16, 18, 21, 24;
+
+@each $text-size in $text-sizes {
+  .f-#{$text-size} {
+      font-size: #{$text-size}px;
+      line-height: #{$text-size + 2}px;
+  }
+}
+
+

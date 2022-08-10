@@ -1,0 +1,88 @@
+
+$fs:12;
+[data-theme="custom"] {
+
+  font-size: #{$fs}px;
+  font-weight: normal !important;
+  .q-banner__content {
+      font-size: #{$fs}px;
+    }
+  .q-field {
+      font-size:#{$fs}px;
+  }
+  .q-field--dense {
+      .q-field__control, .q-field__marginal {
+          height: #{$fs * 3}px;
+      }
+      .q-field__label {
+          font-size: #{$fs}px;
+          top:#{$fs - 4}px;
+      }
+  }
+  .q-field--labeled.q-field--dense .q-field__native{
+      padding-top: 10px ;
+      padding-bottom: 2px ;
+      font-size: #{$fs}px;
+  }
+
+  .q-field--dense {
+    .q-field__control, .q-field__marginal {
+        height: #{$fs * 3}px;
+    }
+    .q-field__label {
+        font-size: #{$fs}px;
+        top:#{$fs - 4}px;
+    }
+  }
+
+  // date view
+  .q-date--portrait-standard .q-date__header {
+    height: 75px;
+  }
+  .q-date__view {
+      min-height: 266px;
+      padding: 8px;
+  }
+
+  // for q-select
+  .q-select {
+      .q-field__marginal {
+        height: #{$fs * 3}px;
+      }
+      .q-field__label {
+        font-size: #{$fs}px;
+        top:#{$fs - 4}px;
+      }
+      // &.q-field--auto-height.q-field--labeled .q-field__control-container {
+      //     padding-top: 24px * $multiplier;
+      // }
+  }
+
+  .q-field--auto-height.q-field--dense.q-field--labeled .q-field__control-container {
+    padding-top: 1px;
+  }
+  .q-field--auto-height.q-field--dense .q-field__control, .q-field--auto-height.q-field--dense .q-field__native {
+      min-height: 36px;
+  }
+
+  // q-item
+  .q-item {
+    min-height: 25px;
+    font-size: 12px;
+    line-height: 12px;
+    .q-item__section--avatar {
+        color: inherit;
+        min-width: 20px;
+    }
+    .q-item__section--side {
+        padding-right: 10px;
+    }
+  }
+
+  // class search
+  .q-field.search-big {
+    font-size:14px;
+  }
+
+
+}

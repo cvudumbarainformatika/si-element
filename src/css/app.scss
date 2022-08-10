@@ -1,0 +1,32 @@
+// app global css in SCSS form
+@import './theme.scss';
+@import './customs.scss';
+@import './text-sizes.scss';
+
+
+.page-light {
+  background-color: $grey-2;
+}
+
+.page-dark {
+  background-color: $dark-page;
+}
+
+.title-desc {
+  margin-top: -5px;
+  color: $grey;
+  font-size: 12px;
+}
+
+
+.my-card {
+  width: 700px;
+}
+
+
+// =====================================================MOBILE
+@media(max-width:800px){
+  .my-card {
+    width: 100%;
+  }
+}
