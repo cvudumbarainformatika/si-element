@@ -7,8 +7,8 @@
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue ./",
-    "custom-icons":"fantasticon src/custom-icons/svg -o public/custom-icons --normalize -t woff woff2 -g css",
-    "custom-icons:watch":"watch \"npm run custom-icons\" src/custom-icons/svg"
+    "custom-icons": "fantasticon src/custom-icons/svg -o public/custom-icons --normalize -t woff woff2 -g css",
+    "custom-icons:watch": "watch \"npm run custom-icons\" src/custom-icons/svg"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
@@ -26,7 +26,9 @@
     "eslint-plugin-import": "^2.19.1",
     "eslint-plugin-n": "^15.0.0",
     "eslint-plugin-promise": "^6.0.0",
-    "eslint-plugin-vue": "^9.0.0"
+    "eslint-plugin-vue": "^9.0.0",
+    "laravel-echo": "^1.13.1",
+    "pusher-js": "^7.3.0"
   },
   "engines": {
     "node": "^18 || ^16 || ^14.19",
