@@ -3,10 +3,12 @@ import axios from 'axios'
 import { getLocalToken } from 'src/modules/storage'
 import { notifErr } from 'src/modules/utils'
 
-const SERVER = 'http://localhost/api.si-element/public/api'
+const SERVER = 'http://localhost/api.si-element/public'
 // const SERVER = 'https://server.udumbarainformatika.my.id/api'
+const base = SERVER + '/api'
+const storageServer = SERVER + '/storage/'
 
-const api = axios.create({ baseURL: SERVER })
+const api = axios.create({ baseURL: base })
 api.defaults.headers.get.Accepts = 'application/json'
 
 api.defaults.headers.common.Authorization = `Bearer ${getLocalToken()}`
@@ -56,4 +58,4 @@ const setToken = (token) => {
 }
 const deleteToken = () => delete api.defaults.headers.common.Authorization
 
-export { axios, api, setToken, deleteToken }
+export { axios, api, setToken, deleteToken, storageServer }
