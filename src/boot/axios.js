@@ -3,7 +3,7 @@ import axios from 'axios'
 import { getLocalToken } from 'src/modules/storage'
 import { notifErr } from 'src/modules/utils'
 
-const SERVER = 'http://localhost/api.si-element/public'
+const SERVER = 'http://api.silamina.test'
 // const SERVER = 'https://server.udumbarainformatika.my.id/api'
 const base = SERVER + '/api'
 const storageServer = SERVER + '/storage/'

@@ -23,7 +23,8 @@ export const useAuthStore = defineStore('auth', {
       this.loading = true
       waitLoad('show')
       try {
-        await api.post('/v1/login', payload).then(resp => {
+        await api.post('/v1/auth/login', payload).then(resp => {
+          console.log('login', resp)
           storage.setLocalToken(resp.data.token)
           storage.setUser(resp.data.user)
           const hdd = storage.getLocalToken()
@@ -56,17 +57,17 @@ export const useAuthStore = defineStore('auth', {
       this.token = ''
     },
     async getUser () {
-      await api.get('/v1/me').then(resp => {
+      await api.get('/v1/auth/profile').then(resp => {
         console.log('me', resp)
-        storage.setUser(resp.data.result)
-        this.user = resp.data.result
+        storage.setUser(resp.data)
+        this.user = resp.data
       })
     },
 
     async logout () {
       waitLoad('show')
       try {
-        await api.post('/v1/logout').then(resp => {
+        await api.post('/v1/auth/logout').then(resp => {
           this.REMOVE_LOKAL()
           routerInstance.replace('/login')
           waitLoad('done')
