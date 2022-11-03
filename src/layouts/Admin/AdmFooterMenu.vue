@@ -11,7 +11,7 @@
     >
       <!-- :to="{ name: tab.url }" -->
       <q-route-tab
-        v-for="(tabb, i) in menus"
+        v-for="(tabb, i) in props.menus"
         :key="'tab' + i"
         :to="{ name: tabb.name }"
         :name="tabb.name"
@@ -33,14 +33,18 @@ const props = defineProps({
   dark: {
     type: Boolean,
     default: false
+  },
+  menus: {
+    type: Array,
+    default: () => []
   }
 })
 
-const menus = ref([
-  { id: 1, name: 'dashboard', icon: 'icon-mat-dashboard' },
-  { id: 2, name: 'surveyor', icon: 'icon-mat-supervisor_account' },
-  { id: 3, name: 'profile', icon: 'icon-mat-person' }
-])
+// const menus = ref([
+//   { id: 1, name: 'dashboard', icon: 'icon-mat-dashboard' },
+//   { id: 2, name: 'surveyor', icon: 'icon-mat-supervisor_account' },
+//   { id: 3, name: 'profile', icon: 'icon-mat-person' }
+// ])
 
 const tab = ref('dashboard')
 console.log('router', props.dark)

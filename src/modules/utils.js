@@ -9,7 +9,17 @@ const removeToken = () => {
   routerInstance.replace('/login')
 }
 
+const hapusToken = () => {
+  storage.deleteLocalToken()
+  storage.deleteHeaderToken()
+}
+const insertToken = (token) => {
+  storage.setLocalToken(token)
+  storage.setHeaderToken(token)
+}
+
 const noftifResp = (resp) => {
+  localStorage.setItem('attempt', 1)
   // console.log('aq ga error', resp)
   // if (resp.status === 202) {
   //   storage.setLocalToken(resp.data.token)
@@ -28,14 +38,14 @@ const notifErr = (resp, next) => {
 
   //   if (status === 200) {
   if (status === 402) {
+    hapusToken()
     console.log('anyar mas', resp)
-    storage.setLocalToken(resp.data.token)
-    localStorage.setItem('token2', resp.data.token)
+    insertToken(resp.data.token)
     // return next()resp.status
     if (resp.config.url !== '/v1/auth/profile') {
       Notify.create({
         message: 'ada kesalahan, harap ulangi',
-        icon: 'icon-eva-message-circle-outline',
+        icon: 'icon-eva-message_circle_outline',
         position: 'bottom-right',
         color: 'negative',
         actions: [
@@ -54,7 +64,7 @@ const notifErr = (resp, next) => {
     for (const key in msgs) {
       Notify.create({
         message: msgs[key][0],
-        icon: 'icon-eva-message-circle-outline',
+        icon: 'icon-eva-message_circle_outline',
         position: 'bottom-right',
         color: 'negative',
         actions: [
@@ -63,15 +73,40 @@ const notifErr = (resp, next) => {
       })
     }
   } else {
-    Notify.create({
-      message: 'Ada Kesalahan Harap ulangi',
-      icon: 'icon-eva-message-circle-outline',
-      position: 'bottom-right',
-      color: 'negative',
-      actions: [
-        { label: 'Dismiss', color: 'yellow', handler: () => { /* console.log('wooow') */ } }
-      ]
-    })
+    const attempt = localStorage.getItem('attempt')
+    if (attempt === 1) {
+      Notify.create({
+        message: 'Ada Kesalahan Harap ulangi',
+        icon: 'icon-eva-message_circle_outline',
+        position: 'bottom-right',
+        color: 'negative',
+        actions: [
+          {
+            label: 'Dismiss',
+            color: 'yellow',
+            handler: () => {
+              /* console.log('wooow') */
+            }
+          }
+        ]
+      })
+    } else {
+      Notify.create({
+        message: 'Ada Kesalahan, Coba Refresh',
+        icon: 'icon-eva-message_circle_outline',
+        position: 'bottom-right',
+        color: 'negative',
+        actions: [
+          {
+            label: 'Dismiss',
+            color: 'yellow',
+            handler: () => {
+              /* console.log('wooow') */
+            }
+          }
+        ]
+      })
+    }
   }
 }
 const notifSuccess = (resp) => {
@@ -88,7 +123,7 @@ const notifSuccess = (resp) => {
 const notifErrVue = (msg) => {
   Notify.create({
     message: msg,
-    icon: 'icon-eva-message-circle-outline',
+    icon: 'icon-eva-message_circle_outline',
     position: 'bottom-right',
     color: 'negative',
     actions: [

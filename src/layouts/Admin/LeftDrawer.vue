@@ -22,13 +22,14 @@
       class="flex column flex-center full-height"
       style="height:calc(100%-60px) "
     >
-      <router-link
-        v-for="(menu, i) in menus"
+      <q-item
+        v-for="(menu, i) in props.menus"
         :key="i"
         :to="`/${menu.name}`"
         replace
         class="sidebar flex flex-center"
-        :active-class="activated(true)"
+        :active-class="props.dark ? 'active-dark text-white' :'active text-primary'"
+        :active="aktif(path)===menu.name"
       >
         <!-- :class="!dark?'page-light':'page-dark'" -->
         <q-tooltip
@@ -45,7 +46,7 @@
           :name="menu.icon"
           size="25px"
         />
-      </router-link>
+      </q-item>
     </div>
     <!-- </q-scroll-area> -->
 
@@ -54,32 +55,41 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-// import { useRouter } from 'vue-router'
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 
 const props = defineProps({
   dark: {
     type: Boolean,
     default: false
+  },
+  menus: {
+    type: Array,
+    default: () => []
   }
 })
 
-const menus = ref([
-  { id: 1, name: 'dashboard', icon: 'icon-mat-dashboard' },
-  { id: 2, name: 'surveyor', icon: 'icon-mat-supervisor_account' }
-  // { id: 3, name: 'pelayanan', icon: 'icon-mat-medical_information' }
-])
-
-function activated(val) {
-  if (val) {
-    if (props.dark) {
-      return 'page-dark text-white'
-    } else {
-      return 'bg-grey-4 text-primary'
-    }
-  }
-  return 'text-grey-5'
+const path = computed(() => useRoute().name)
+const aktif = (apem) => {
+  const temp = apem.split('.')
+  return temp.length > 1 ? temp[0] + '.' + temp[1] : temp[0]
 }
+// const menus = ref([
+//   { id: 1, name: 'dashboard', link: 'dashboard', icon: 'icon-mat-dashboard' },
+//   { id: 2, name: 'surveyor', link: 'surveyor', icon: 'icon-mat-supervisor_account' }
+//   // { id: 3, name: 'pelayanan', icon: 'icon-mat-medical_information' }
+// ])
+
+// function activated(val) {
+//   if (val) {
+//     if (props.dark) {
+//       return 'page-dark text-white'
+//     } else {
+//       return 'bg-grey-4 text-primary'
+//     }
+//   }
+//   return 'text-grey-5'
+// }
 
 // const router = useRouter()
 console.log('router', props.dark)
@@ -95,10 +105,17 @@ a.sidebar {
   text-decoration: none;
   color:$grey-5;
 }
-a.router-link-active, a.router-link-exact-active {
+a.router-link-active, a.router-link-exact-active, a.active {
     margin-left: 10px;
     border-radius: 10px 0px 0px 10px;
     border-left: 3px solid $primary;
+    background-color: $grey-4;
+  }
+a.router-link-active-dark, a.router-link-exact-active-dark, a.active-dark {
+    margin-left: 10px;
+    border-radius: 10px 0px 0px 10px;
+    border-left: 3px solid $primary;
+    background-color: $dark-page;
   }
 
 .just-shadow {

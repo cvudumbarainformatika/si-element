@@ -1,7 +1,7 @@
 @font-face {
     font-family: "icons";
-    src: url("./icons.woff?327c8bd635705d8e26ca2835ede9d24e") format("woff"),
-url("./icons.woff2?327c8bd635705d8e26ca2835ede9d24e") format("woff2");
+    src: url("./icons.woff?6e813f27bbf174fb99b3b3a8c0b2e1b6") format("woff"),
+url("./icons.woff2?6e813f27bbf174fb99b3b3a8c0b2e1b6") format("woff2");
 }
 
 i[class^="icon-"]:before, i[class*=" icon-"]:before {
@@ -30,7 +30,7 @@ i[class^="icon-"]:before, i[class*=" icon-"]:before {
 .icon-eva-home:before {
     content: "\f105";
 }
-.icon-eva-message-circle-outline:before {
+.icon-eva-message_circle_outline:before {
     content: "\f106";
 }
 .icon-eva-person-outline:before {

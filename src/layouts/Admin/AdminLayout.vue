@@ -12,6 +12,7 @@
       v-if="!mobile"
       v-model="leftDrawerOpen"
       :dark="dark"
+      :menus="menus"
     />
     <q-drawer
       v-model="rightDrawerOpen"
@@ -27,6 +28,7 @@
     <adm-footer-menu
       v-if="mobile"
       :dark="dark"
+      :menus="menus"
     />
     <q-page-container>
       <router-view />
@@ -60,6 +62,9 @@ import LeftDrawer from './LeftDrawer.vue'
 import AdmHeader from './AdmHeader.vue'
 import AdmFooterMenu from './AdmFooterMenu.vue'
 import { useAuthStore } from 'src/stores/auth'
+import { useAppSettingStore } from 'src/stores/appsetting/appsetting'
+
+const menus = useAppSettingStore().menus
 
 const store = useAuthStore()
 const leftDrawerOpen = ref(false)
