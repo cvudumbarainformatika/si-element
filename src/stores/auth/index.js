@@ -59,8 +59,10 @@ export const useAuthStore = defineStore('auth', {
     async getUser () {
       await api.get('/v1/auth/profile').then(resp => {
         console.log('me', resp)
-        storage.setUser(resp.data)
-        this.user = resp.data
+        if (resp.status === 200) {
+          storage.setUser(resp.data)
+          this.user = resp.data
+        }
       })
     },
 

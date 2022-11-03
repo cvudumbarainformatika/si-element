@@ -1,9 +1,9 @@
 import { boot } from 'quasar/wrappers'
 import axios from 'axios'
 import { getLocalToken } from 'src/modules/storage'
-import { notifErr } from 'src/modules/utils'
+import { noftifResp, notifErr } from 'src/modules/utils'
 
-const SERVER = 'http://api.silamina.test'
+const SERVER = 'http://api.si-element.test'
 // const SERVER = 'https://server.udumbarainformatika.my.id/api'
 const base = SERVER + '/api'
 const storageServer = SERVER + '/storage/'
@@ -31,6 +31,7 @@ const interceptResponse = (res) => {
   try {
     // check for response code 123 and redirect to login
     // console.log('2. interceptResponse', res)
+    noftifResp(res)
     return Promise.resolve(res)
   } catch (e) {
     // check for response code 123 and redirect to login
