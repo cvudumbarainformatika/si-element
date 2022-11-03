@@ -22,31 +22,89 @@
       class="flex column flex-center full-height"
       style="height:calc(100%-60px) "
     >
-      <q-item
+      <div
         v-for="(menu, i) in props.menus"
         :key="i"
-        :to="`/${menu.name}`"
-        replace
-        class="sidebar flex flex-center"
-        :active-class="props.dark ? 'active-dark text-white' :'active text-primary'"
-        :active="aktif(path)===menu.name"
+        @mouseenter="hover(menu,i)"
       >
-        <!-- :class="!dark?'page-light':'page-dark'" -->
-        <q-tooltip
+        <q-item
+          ref="refItem"
+          :key="i"
+          :to="`/${menu.name}`"
+          replace
+          class="sidebar flex flex-center"
+          :active-class="props.dark ? 'active-dark text-white' :'active text-primary'"
+          :active="aktif(path)===menu.name"
+          @click="menuClick(menu,i)"
+        >
+          <q-menu
+            ref="refMenu"
+            anchor="top right"
+            self="top left"
+            transition-show="slide-down"
+            transition-hide="slide-right"
+            :offset="[0,0]"
+          >
+            <q-card style="width:200px">
+              <q-card-section>
+                <div class="text-weight-bold f-12">
+                  <q-item
+                    :to="`/${menu.link}`"
+                  >
+                    <q-item-section>{{ menu.nama }}</q-item-section>
+                  </q-item>
+                </div>
+                <div class="q-my-sm">
+                  <q-separator />
+                </div>
+
+                <div
+                  v-for="(submenu,n) in menu.submenus"
+                  :key="n"
+                >
+                  <div v-if="submenu.link">
+                    <q-item
+                      ref="refSubItem"
+                      :to="`/${submenu.link}`"
+                      replace
+                      class="submenu flex flex-center item item-link"
+                      :active-class="dark? 'active-dark' : 'active'"
+                      :active="path===submenu.name"
+                      exact
+                    >
+                      <!-- {{ aktif(menu.name) }} : {{ path }} -->
+                      <q-item-section
+                        v-if="submenu.icon"
+                        avatar
+                      >
+                        <q-icon
+                          :name="submenu.icon"
+                          size="25px"
+                        />
+                      </q-item-section>
+                      <q-item-section>{{ submenu.nama }}</q-item-section>
+                    </q-item>
+                  </div>
+                </div>
+              </q-card-section>
+            </q-card>
+          </q-menu>
+          <!-- <q-tooltip
           class="bg-primary"
           anchor="center right"
           self="center left"
           :offset="[5, 5]"
         >
           <strong class="">{{ menu.name }}</strong>
-          <!-- <em>right</em> -->
+
           (<q-icon name="icon-mat-keyboard_arrow_right" />)
-        </q-tooltip>
-        <q-icon
-          :name="menu.icon"
-          size="25px"
-        />
-      </q-item>
+        </q-tooltip> -->
+          <q-icon
+            :name="menu.icon"
+            size="25px"
+          />
+        </q-item>
+      </div>
     </div>
     <!-- </q-scroll-area> -->
 
@@ -55,7 +113,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 const props = defineProps({
@@ -72,7 +130,41 @@ const props = defineProps({
 const path = computed(() => useRoute().name)
 const aktif = (apem) => {
   const temp = apem.split('.')
-  return temp.length > 1 ? temp[0] + '.' + temp[1] : temp[0]
+  return temp[0]
+}
+const refItem = ref(null)
+const refMenu = ref(null)
+const prev = ref(0)
+const hover = (menu, i) => {
+  refMenu.value[i].show()
+  if (!refItem.value[i].active) {
+    refMenu.value[i].offset[0] = 16
+    refMenu.value[i].offset[1] = 0
+  } else {
+    refMenu.value[i].offset[0] = 0
+    refMenu.value[i].offset[1] = 0
+  }
+  //     if (menu.submenus.length) {
+  // }
+  // console.log('prev', prev.value)
+  if (i !== prev.value) {
+    leave(prev.value)
+  }
+  // console.log('prev', prev.value, 'i', i)
+  prev.value = i
+  // console.log('ref item', refItem.value[i].active)
+  // console.log('ref menu', refMenu.value[i].offset)
+}
+const leave = (i) => {
+  refMenu.value[i].hide()
+  // if (menu.submenus.length) {
+  // }
+  // console.log('leave', i)
+  // console.log('ref item ', [i], refItem.value[i].active)
+  // console.log('ref menu', refMenu.value[i])
+}
+const menuClick = (menu, i) => {
+  // hover(menu, i)
 }
 // const menus = ref([
 //   { id: 1, name: 'dashboard', link: 'dashboard', icon: 'icon-mat-dashboard' },
@@ -99,6 +191,11 @@ console.log('router', props.dark)
 .sidebar {
   width: calc(100% - 10px);
   height:60px;
+}
+
+.submenu {
+  width: calc(100% - 10px);
+  height: 30px;
 }
 
 a.sidebar {

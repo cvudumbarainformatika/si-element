@@ -73,7 +73,8 @@ const notifErr = (resp, next) => {
       })
     }
   } else {
-    const attempt = localStorage.getItem('attempt')
+    const attempt = parseFloat(localStorage.getItem('attempt'))
+    console.log('attempt', attempt)
     if (attempt === 1) {
       Notify.create({
         message: 'Ada Kesalahan Harap ulangi',
@@ -107,6 +108,8 @@ const notifErr = (resp, next) => {
         ]
       })
     }
+    const toAtt = attempt + 1
+    localStorage.setItem('attempt', toAtt)
   }
 }
 const notifSuccess = (resp) => {

@@ -9,6 +9,16 @@ const routes = [
       { path: '/dashboard', name: 'dashboard', component: () => import('pages/IndexPage.vue') },
       { path: '/surveyor', name: 'surveyor', component: () => import('pages/v1/surveyor/IndexPage.vue') },
       { path: '/master', name: 'master', component: () => import('pages/v1/master/IndexPage.vue') },
+      {
+        path: '/setting',
+        name: 'setting',
+        component: () => import('pages/v1/setting/IndexPage.vue'),
+        children: [
+          { path: '/setting', redirect: '/setting/info' },
+          { path: '/setting/info', name: 'setting.info', component: () => import('pages/v1/setting/info/InfoPage.vue') },
+          { path: '/setting/themes', name: 'setting.themes', component: () => import('pages/v1/setting/theme/ThemesPage.vue') }
+        ]
+      },
       { path: '/profile', name: 'profile', component: () => import('pages/v1/profile/IndexPage.vue') }
     ]
   },
