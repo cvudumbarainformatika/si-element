@@ -31,7 +31,18 @@
       :menus="menus"
     />
     <q-page-container>
-      <router-view />
+      <div
+        v-if="!mobile"
+        class="q-pa-md"
+      >
+        <router-view />
+      </div>
+      <div
+        v-if="mobile"
+        class="q-pt-md"
+      >
+        <router-view />
+      </div>
     </q-page-container>
     <q-page-sticky
       position="bottom-right"

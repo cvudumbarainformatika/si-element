@@ -45,7 +45,10 @@
             transition-hide="slide-right"
             :offset="[0,0]"
           >
-            <q-card style="width:200px">
+            <q-card
+              v-if="menu.submenus.length"
+              style="width:200px"
+            >
               <q-card-section>
                 <div class="text-weight-bold f-12">
                   <q-item
@@ -85,6 +88,17 @@
                       <q-item-section>{{ submenu.nama }}</q-item-section>
                     </q-item>
                   </div>
+                </div>
+              </q-card-section>
+            </q-card>
+            <q-card v-if="!menu.submenus.length">
+              <q-card-section>
+                <div class="text-weight-bold f-12">
+                  <q-item
+                    :to="`/${menu.link}`"
+                  >
+                    <q-item-section>{{ menu.nama }}</q-item-section>
+                  </q-item>
                 </div>
               </q-card-section>
             </q-card>
