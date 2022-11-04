@@ -44,6 +44,7 @@ export const useAppSettingStore = defineStore('app_setting', {
         ]
       }
     ],
+    form: { nama: 'Si-Element' },
     infos: [],
     themes: []
   }),
@@ -56,17 +57,20 @@ export const useAppSettingStore = defineStore('app_setting', {
       this.saveSetting()
     },
     // api related function
+    getInitialData() {
+      this.getDataSetting()
+    },
 
     getDataSetting() {
       return new Promise((resolve, reject) => {
         api
-          .get('v1/setting/info')
+          .get('v1/setting/all')
           .then((resp) => {
-            // console.log('setting', resp.data[0])
+            console.log('setting', resp.data)
             // this.menus = resp.data[0].menus
             // this.levels = resp.data[0].levels
-            this.themes = resp.data[0].themes
-            this.infos = resp.data[0].infos
+            this.themes = resp.data.themes
+            this.infos = resp.data.infos
             // this.info = this.infos
             resolve(resp)
           })
@@ -84,7 +88,7 @@ export const useAppSettingStore = defineStore('app_setting', {
       this.loading = true
       return new Promise((resolve, reject) => {
         api
-          .post('v1/setting/store-info', this.form)
+          .post('v1/setting/store', this.form)
           .then((resp) => {
             this.loading = false
             // console.log('simpan', resp)

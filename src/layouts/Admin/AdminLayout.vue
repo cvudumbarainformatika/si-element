@@ -78,6 +78,7 @@ import { useAppSettingStore } from 'src/stores/appsetting/appsetting'
 const menus = useAppSettingStore().menus
 
 const store = useAuthStore()
+const setting = useAppSettingStore()
 const leftDrawerOpen = ref(false)
 const rightDrawerOpen = ref(false)
 const $q = useQuasar()
@@ -98,6 +99,7 @@ function toggleLeftDrawer() {
 
 onMounted(() => {
   store.getUser()
+  setting.getInitialData()
 })
 
 // function toggleRightDrawer() {

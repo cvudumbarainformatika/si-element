@@ -1,6 +1,5 @@
 <template>
   <div>
-    halama ini ada isinya tapi belum keambil
     <div class="row justify-center items-center q-col-gutter-md">
       <div
         v-for="(list, i) in lists"
