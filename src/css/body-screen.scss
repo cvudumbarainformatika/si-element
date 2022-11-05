@@ -1,0 +1,20 @@
+//custom css by body screen
+  body.screen--sm, body.screen--xs {
+    .full_height{
+      height: calc(100vh - 125px);
+      position: relative;
+      .action-right_save{
+        position: fixed;
+        bottom: 65px;
+        left:250px;
+      }
+      .action-right_cancel{
+        position: fixed;
+        bottom: 65px;
+        left:140px;
+      }
+    }
+    .my__color {
+      background-color: rgb(0, 255, 34);
+    }
+  }

@@ -3,10 +3,10 @@
     <app-card
       title="Data Info"
       desc="Infomasi mengenai Aplikasi"
-      :class="mobile ? 'full-height' + ' q-px-lg q-pb-lg' : ' q-px-lg q-pb-lg'"
+      class="q-px-lg q-pb-lg full_height"
     >
       <template #content>
-        <div class="row q-col-gutter-sm">
+        <div class="row q-col-gutter-sm ">
           <div class="col-sm-5 col-xs-12">
             <app-input
               v-model="setting.infos.nama"
@@ -36,11 +36,11 @@
               outlined
               :loading="setting.loading"
             />
-            <div class="text-right">
+            <div class="text-right action-right_save">
               <app-btn
                 label="Simpan"
                 :loading="setting.loading"
-                @click="setting.saveSetting"
+                @click="save"
               />
             </div>
           </div>
@@ -50,9 +50,15 @@
   </div>
 </template>
 <script setup>
-import { useQuasar } from 'quasar'
+// import { useQuasar } from 'quasar'
+import { notifSuccessVue } from 'src/modules/utils'
 import { useAppSettingStore } from 'src/stores/appsetting/appsetting'
-const $q = useQuasar()
-const mobile = $q.screen.lt.md
+// const $q = useQuasar()
+// const mobile = $q.screen.lt.md
 const setting = useAppSettingStore()
+const save = () => {
+  setting.saveSetting().then(() => {
+    notifSuccessVue('Info berhasil disimpan')
+  })
+}
 </script>

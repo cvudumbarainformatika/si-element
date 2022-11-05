@@ -1,5 +1,5 @@
 <template>
-  <q-card class="full-width">
+  <q-card class="full-width full_height">
     <q-card-section v-if="isHeader">
       <div class="text-h6 text-weight-bold">
         {{ title }}

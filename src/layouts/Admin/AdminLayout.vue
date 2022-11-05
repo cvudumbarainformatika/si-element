@@ -29,6 +29,7 @@
       v-if="mobile"
       :dark="dark"
       :menus="menus"
+      @set="setDark"
     />
     <q-page-container>
       <div
@@ -39,12 +40,13 @@
       </div>
       <div
         v-if="mobile"
-        class="q-pt-md full-height"
+        class="q-pt-md screen--sm"
       >
         <router-view />
       </div>
     </q-page-container>
     <q-page-sticky
+      v-if="!mobile"
       position="bottom-right"
       :offset="[18, 18]"
     >

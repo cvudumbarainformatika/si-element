@@ -2,7 +2,7 @@ import { boot } from 'quasar/wrappers'
 import axios from 'axios'
 import { getLocalToken } from 'src/modules/storage'
 import { noftifResp, notifErr } from 'src/modules/utils'
-import { setCssVar } from 'quasar'
+import { setCssVar, Screen } from 'quasar'
 
 // const SERVER = 'http://api.si-element.test'
 const SERVER = 'http://192.168.0.110/api.si-element/public'
@@ -62,6 +62,9 @@ const getDataSetting = () => {
     })
   })
 }
+
+// set screen
+Screen.setSizes({ xs: 300, sm: 500, md: 800, lg: 1024, xl: 2000 })
 export default boot(({ app }) => {
   app.config.globalProperties.$axios = axios
   app.config.globalProperties.$api = api

@@ -118,6 +118,18 @@ const notifSuccess = (resp) => {
     message: msg || 'Sucees!, Wow Kerja Bagus!',
     icon: 'icon-mat-thumb_up_off_alt',
     position: 'top-right',
+    color: 'positive',
+    actions: [
+      { label: 'Dismiss', color: 'yellow', handler: () => { /* console.log('wooow') */ } }
+    ]
+  })
+}
+const notifSuccessVue = (msa) => {
+  Notify.create({
+    message: msa || 'Sucees!',
+    icon: 'icon-mat-thumb_up_off_alt',
+    position: 'top-right',
+    color: 'positive',
     actions: [
       { label: 'Dismiss', color: 'yellow', handler: () => { /* console.log('wooow') */ } }
     ]
@@ -130,7 +142,7 @@ const notifErrVue = (msg) => {
     position: 'bottom-right',
     color: 'negative',
     actions: [
-      { label: 'Dismiss', color: 'yellow', handler: () => { /* console.log('wooow') */ } }
+      { label: 'Dismiss', color: 'warning', handler: () => { /* console.log('wooow') */ } }
     ]
   })
 }
@@ -149,4 +161,11 @@ const waitLoad = (cond) => {
   }
 }
 
-export { notifSuccess, notifErr, notifErrVue, waitLoad, noftifResp }
+export {
+  notifSuccess,
+  notifErr,
+  notifErrVue,
+  waitLoad,
+  noftifResp,
+  notifSuccessVue
+}
