@@ -3,7 +3,7 @@
     <app-card
       title="Data Info"
       desc="Infomasi mengenai Aplikasi"
-      class="q-px-lg q-pb-lg"
+      :class="mobile ? 'full-height' + ' q-px-lg q-pb-lg' : ' q-px-lg q-pb-lg'"
     >
       <template #content>
         <div class="row q-col-gutter-sm">
@@ -50,6 +50,9 @@
   </div>
 </template>
 <script setup>
+import { useQuasar } from 'quasar'
 import { useAppSettingStore } from 'src/stores/appsetting/appsetting'
+const $q = useQuasar()
+const mobile = $q.screen.lt.md
 const setting = useAppSettingStore()
 </script>

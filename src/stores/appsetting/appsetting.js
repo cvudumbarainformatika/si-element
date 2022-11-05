@@ -3,6 +3,7 @@ import { api } from 'src/boot/axios'
 
 export const useAppSettingStore = defineStore('app_setting', {
   state: () => ({
+    loading: false,
     menus: [
       {
         id: 1,

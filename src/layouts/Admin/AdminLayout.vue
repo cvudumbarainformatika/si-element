@@ -39,7 +39,7 @@
       </div>
       <div
         v-if="mobile"
-        class="q-pt-md"
+        class="q-pt-md full-height"
       >
         <router-view />
       </div>

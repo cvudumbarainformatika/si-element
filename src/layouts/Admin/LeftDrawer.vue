@@ -225,7 +225,7 @@ a.router-link-active, a.router-link-exact-active, a.active {
 a.router-link-active-dark, a.router-link-exact-active-dark, a.active-dark {
     margin-left: 10px;
     border-radius: 10px 0px 0px 10px;
-    border-left: 3px solid $primary;
+    border-left: 3px solid white;
     background-color: $dark-page;
   }
 
