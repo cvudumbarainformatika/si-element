@@ -3,7 +3,7 @@
     <app-card
       title="Data Info"
       desc="Infomasi mengenai Aplikasi"
-      class="q-px-lg q-pb-lg full_height"
+      :class="mobile ? 'q-px-sm q-pb-lg full_height' : 'q-px-lg q-pb-lg'"
     >
       <template #content>
         <div class="row q-col-gutter-sm ">
@@ -50,11 +50,11 @@
   </div>
 </template>
 <script setup>
-// import { useQuasar } from 'quasar'
+import { useQuasar } from 'quasar'
 import { notifSuccessVue } from 'src/modules/utils'
 import { useAppSettingStore } from 'src/stores/appsetting/appsetting'
-// const $q = useQuasar()
-// const mobile = $q.screen.lt.md
+const $q = useQuasar()
+const mobile = $q.screen.lt.md
 const setting = useAppSettingStore()
 const save = () => {
   setting.saveSetting().then(() => {
