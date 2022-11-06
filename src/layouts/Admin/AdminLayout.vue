@@ -64,6 +64,15 @@
         />
       </q-fab>
     </q-page-sticky>
+    <q-btn
+      v-if="mobile"
+      dense
+      :color="dark?'warning':'dark'"
+      class="bulb"
+      round
+      icon="icon-mat-tungsten"
+      @click="setDark(dark)"
+    />
   </q-layout>
 </template>
 

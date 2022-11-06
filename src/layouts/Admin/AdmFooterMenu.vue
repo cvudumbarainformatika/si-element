@@ -7,11 +7,12 @@
       v-model="tab"
       indicator-color="transparent"
     >
+      <!-- :class="warna ? 'bg-dark': ''" -->
       <!-- :to="{ name: tab.url }" -->
       <q-route-tab
         v-for="(tabb, i) in props.menus"
         :key="'tab' + i"
-        class="text-grey-10"
+        :class="warna ? 'text-white bg-dark' : 'text-grey-10'"
         active-color="primary"
         :to="{ name: tabb.name }"
         :name="tabb.name"
@@ -22,12 +23,12 @@
           {{ tab.name }}
         </div> -->
       </q-route-tab>
-      <q-tab
-        :class="warna ? 'text-dark' : 'text-warning' "
-        :color="warna ? 'text-dark' : 'text-warning' "
+      <!-- :color="warna ? 'text-warning' :'text-dark ' " -->
+      <!-- <q-tab
+        :class="warna ? 'text-white bg-warning' : 'text-white bg-dark' "
         icon="icon-mat-tungsten"
         @click="emits('set',dark)"
-      />
+      /> -->
     </q-tabs>
   </q-footer>
 </template>
@@ -45,9 +46,9 @@ const props = defineProps({
     default: () => []
   }
 })
-const emits = defineEmits(['set'])
+// const emits = defineEmits(['set'])
 const warna = computed(() => {
-  console.log('dark ', props.dark)
+  // console.log('dark ', props.dark)
   return props.dark
 })
 // const menus = ref([
@@ -61,4 +62,5 @@ console.log('router', props.dark)
 </script>
 
 <style lang="scss" scoped>
+
 </style>

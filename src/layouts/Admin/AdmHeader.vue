@@ -41,6 +41,7 @@
                 <q-card-section>
                   <div class="text-weight-bold f-12">
                     <q-item
+                      class="submenu"
                       :to="`/${menu.link}`"
                     >
                       <q-item-section>{{ menu.nama }}</q-item-section>
@@ -60,7 +61,7 @@
                         :to="`/${submenu.link}`"
                         replace
                         class="submenu flex flex-center item item-link"
-                        :active-class="dark? 'active-dark' : 'active'"
+                        :active-class="dark? 'active-dark text-secondary' : 'active text-primary'"
                         :active="path===submenu.name"
                         exact
                       >
@@ -146,4 +147,22 @@ const menu = computed(() => {
 .flip__icon {
   transform: scaleX(-1);
 }
+.submenu {
+  width: calc(100% - 10px);
+  height: 30px;
+  text-decoration: none;
+  color:$grey-5;
+}
+.active {
+    margin-left: 10px;
+    border-radius: 10px 0px 0px 10px;
+    border-left: 3px solid $primary;
+    background-color: $grey-4;
+  }
+  .active-dark {
+    margin-left: 10px;
+    border-radius: 10px 0px 0px 10px;
+    border-left: 3px solid white;
+    background-color: $dark-page;
+  }
 </style>

@@ -210,6 +210,8 @@ console.log('router', props.dark)
 .submenu {
   width: calc(100% - 10px);
   height: 30px;
+  text-decoration: none;
+  color:$grey-5;
 }
 
 a.sidebar {
