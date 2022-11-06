@@ -1,9 +1,14 @@
 // app global css in SCSS form
 @import './theme.scss';
+@import './font.scss';
 @import './customs.scss';
 @import './text-sizes.scss';
 @import './body-screen.scss';
 
+
+body{
+  font-family: 'Poppins-Medium';
+}
 
 .page-light {
   background-color: $grey-2;

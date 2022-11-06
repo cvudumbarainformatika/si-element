@@ -124,5 +124,8 @@ export default {
     upload: 'icon-mat-cloud_upload',
     removeQueue: 'icon-mat-clear_all',
     removeUploaded: 'icon-mat-done_all'
+  },
+  select: {
+    cancel: 'icon-mat-cancel'
   }
 }
