@@ -55,11 +55,11 @@
       <div class="absolute-bottom q-pa-lg text-grey-6">
         <q-separator />
         <div class="">
-          Aplikasi SIMRS ini
+          Aplikasi LIPA MITRA ini
           tidak di perjualbelikan secara bebas tanpa seizin dari pembuatnya.
         </div>
         <div class="q-mt-lg text-right f-14">
-          SIMRS Versi BETA
+          LIPA MITRA Versi BETA
         </div>
       </div>
     </q-card>

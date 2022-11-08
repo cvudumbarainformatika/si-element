@@ -9,6 +9,7 @@ const routes = [
       { path: '/dashboard', name: 'dashboard', component: () => import('pages/IndexPage.vue') },
       { path: '/surveyor', name: 'surveyor', component: () => import('pages/v1/surveyor/IndexPage.vue') },
       { path: '/master', name: 'master', component: () => import('pages/v1/master/IndexPage.vue') },
+      { path: '/user', name: 'user', component: () => import('pages/v1/user/IndexPage.vue') },
       {
         path: '/setting',
         name: 'setting',

@@ -23,6 +23,14 @@ export const useAppSettingStore = defineStore('app_setting', {
       },
       {
         id: 3,
+        nama: 'user',
+        name: 'user',
+        link: 'user',
+        icon: 'icon-mat-person',
+        submenus: []
+      },
+      {
+        id: 4,
         nama: 'setting',
         name: 'setting',
         link: 'setting',
