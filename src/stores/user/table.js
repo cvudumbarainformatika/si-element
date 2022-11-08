@@ -1,14 +1,11 @@
 import { defineStore } from 'pinia'
-import { api } from 'boot/axios'
-// import { routerInstance } from 'src/boot/router'
+import { api } from 'src/boot/axios'
 import { notifErr, notifSuccess } from 'src/modules/utils'
-// import { Dialog } from 'quasar'
 
-export const useSurveyorTable = defineStore('surveyor_table', {
+export const useUserTable = defineStore('user_table', {
   state: () => ({
     items: [],
     meta: {},
-    item: {},
     loading: false,
     params: {
       q: '',
@@ -19,80 +16,68 @@ export const useSurveyorTable = defineStore('surveyor_table', {
     },
     columns: [],
     columnHide: [
-      'id', 'user_id', 'tempat_lahir', 'tanggal_lahir',
-      'gender', 'agama', 'no_hp1', 'no_hp2',
-      'nama_npwp', 'nama_bank', 'no_rekening',
-      'nama_buku_tabungan', 'no_asuransi_bpjs', 'nilai_toefl', 'bidang_survei', 'status_kepegawaian',
-      'profesi', 'alamat', 'provinsi', 'kabkot', 'kecamatan', 'kelurahan', 'kodepos', 'domil_alamat', 'domil_provinsi',
-      'domil_kabkot', 'domil_kecamatan', 'domil_kelurahan', 'domil_kodepos', 'created_at', 'updated_at']
+      'id', 'created_at', 'email_verified_at', 'password', 'remember_token', 'updated_at'
+    ]
   }),
-
-  getters: {
-    getterColumns (state) {
-      return state.columns.filter((el) => !state.columnHide.includes(el))
-    }
-  },
-
   actions: {
-    setSearch (val) {
+    setSearch(val) {
       this.params.q = val
       this.getDataTable()
     },
-    setOder (payload) {
+    setOrder(payload) {
       this.params.order_by = payload
       this.params.sort === 'desc' ? this.params.sort = 'asc' : this.params.sort = 'desc'
       this.getDataTable()
     },
-    setPage (payload) {
-      console.log('setPage', payload)
+    setPage(payload) {
+      console.log('setpage', payload)
       this.params.page = payload
       this.getDataTable()
     },
-    setPerPage (payload) {
+    setPerPage(payload) {
       this.params.per_page = payload
       this.params.page = 1
       this.getDataTable()
     },
-    setColumns (payload) {
+    setColums(payload) {
       const thumb = payload.map(x => Object.keys(x))
       this.columns = thumb[0]
-      // console.log('columns', this.columns)
     },
-
     refreshTable() {
       this.params.page = 1
+      this.params.q = ''
       this.getDataTable()
     },
-
-    async getDataTable () {
+    async getDataTable() {
       this.loading = true
       const params = { params: this.params }
       try {
-        await api.get('/v1/surveyor/all', params).then(resp => {
-          console.log('items', resp)
+        await api.get('/v1/user/all', params).then(resp => {
+          console.log('userdata', resp.data)
           if (resp.status === 200) {
             this.items = resp.data.data
             this.meta = resp.data
-            this.setColumns(resp.data.data)
+            this.setColums(resp.data.data)
             this.loading = false
           }
         })
-      } catch (err) {
+      } catch (error) {
         this.loading = false
       }
     },
 
-    async deletesData (payload) {
+    async deletesData(payload) {
       const params = { id: payload }
       try {
-        await api.post('/v1/surveyor/destroy', params).then(resp => {
+        await api.post('/v1/user/destroy', params).then(resp => {
           notifSuccess(resp)
           this.getDataTable()
         })
       } catch (error) {
-        console.log('err surveyor', error.response)
+        console.log('errDelete', error.response)
         notifErr(error.response)
       }
     }
   }
+
 })
