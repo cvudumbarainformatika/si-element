@@ -19,7 +19,7 @@
             :sort="table.params.sort"
             :loading="table.loading"
             :to-search="table.params.q"
-            row-image="image"
+            is-konfirm
             @set-order="table.setOder"
             @set-row="table.setPerPage"
             @goto="table.setPage"
@@ -29,8 +29,14 @@
             @refresh="table.refreshTable"
             @new-data="store.newData"
             @edit-data="store.editData"
+            @konfirm-data="store.konfirmasiData"
           >
             <!-- ini untuk ubah header -->
+            <template #cell-status="{row}">
+              <div>
+                {{ row.status === 1 ? 'Butuh konfirmasi' : row.status === 2 ? 'Profil kurang' : row.status === 3 ? 'Profil lengkap' : '' }}
+              </div>
+            </template>
             <!-- <template #col-name>
                 <div>Nama</div>
               </template>

@@ -296,6 +296,23 @@
           </td>
           <td class="text-right">
             <q-btn
+              v-if="isKonfirm"
+              flat
+              class=""
+              size="sm"
+              round
+              color="grey"
+              icon="icon-mat-check"
+              @click="emits('konfirmData',item)"
+            >
+              <q-tooltip
+                anchor="top middle"
+                self="center middle"
+              >
+                Konfirmasi
+              </q-tooltip>
+            </q-btn>
+            <q-btn
               flat
               class=""
               size="sm"
@@ -381,9 +398,11 @@ const props = defineProps({
   orderBy: { type: String, default: 'id' },
   sort: { type: String, default: 'desc' },
   toSearch: { type: String, default: '' },
-  isChecked: { type: Boolean, default: false }
+  isChecked: { type: Boolean, default: false },
+  isKonfirm: { type: Boolean, default: false }
+
 })
-const emits = defineEmits(['newData', 'editData', 'goto', 'deleteIds', 'setRow', 'setColumns', 'setOrder', 'find', 'delete', 'refresh'])
+const emits = defineEmits(['newData', 'editData', 'goto', 'deleteIds', 'setRow', 'setColumns', 'setOrder', 'find', 'delete', 'refresh', 'konfirmData'])
 
 // const per_page = ref(5)
 const refCellTable = ref(null)

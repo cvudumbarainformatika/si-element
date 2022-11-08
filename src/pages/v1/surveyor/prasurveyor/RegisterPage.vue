@@ -14,10 +14,10 @@
             <img src="~assets/logos/logo.png">
           </q-avatar>
           <div class="text-h6 text-white">
-            Halaman Login
+            Halaman Registrasi
           </div>
           <div class="text-white">
-            Silahkan Anda Login Terlebih Dahulu
+            Silahkan Anda Registrasi Terlebih Dahulu
           </div>
         </div>
         <q-form
@@ -26,42 +26,40 @@
           style="margin-top:70px"
           @submit="onSubmit"
         >
-          <app-input
-            v-model="form.email"
-            dense
-            label="email"
-            validator="email"
-            icon="icon-mat-email"
-          />
-          <app-input
-            v-model="form.password"
-            dense
-            type="password"
-            label="password"
-            icon="icon-mat-key"
-            class="q-mt-sm"
-          />
-
+          <div class="q-gutter-sm">
+            <app-input
+              v-model="storeForm.form.nik"
+              label="nik"
+              type="number"
+              icon="icon-mat-pin"
+              lazy-rules
+              :rules="[
+                (val) => (val !== null && val !== '') || 'Harap diisi',
+                (val) => (val.length <= 16 && val.length >= 16) || 'wajib 16 karakter',
+              ]"
+            />
+            <app-input
+              v-model="storeForm.form.nama_lengkap"
+              label="nama"
+              icon="icon-mat-person"
+            />
+            <app-input
+              v-model="storeForm.form.email"
+              dense
+              label="email"
+              validator="email"
+              icon="icon-mat-email"
+            />
+          </div>
           <div style="margin-top:50px">
             <app-btn
               type="submit"
-              :loading="storeAuth.loading"
+              :loading="storeForm.loading"
               class="full-width"
-              label="Login"
+              label="Registrasi"
             />
           </div>
         </q-form>
-        <div>
-          <p class="text-primary float-left">
-            Lupa password
-          </p>
-          <p
-            class="text-primary float-right cursor-pointer"
-            @click="toRegistrasi"
-          >
-            Belum punya akun ?
-          </p>
-        </div>
       </q-card-section>
       <div class="absolute-bottom q-pa-lg text-grey-6">
         <q-separator />
@@ -78,26 +76,25 @@
 </template>
 <script setup>
 import { ref } from 'vue'
-import { useQuasar } from 'quasar'
-import { useAuthStore } from 'src/stores/auth'
-import { routerInstance } from 'src/boot/router'
+// import { useQuasar } from 'quasar'
+// import { useAuthStore } from 'src/stores/auth'
+import { usePrasurveyorForm } from 'src/stores/surveyor/prasurveyor/form'
 
-const storeAuth = useAuthStore()
-const $q = useQuasar()
+// const storeAuth = useAuthStore()
+const storeForm = usePrasurveyorForm()
+// const $q = useQuasar()
 
 const myForm = ref(null)
-const form = ref({
-  email: '',
-  password: '',
-  device_name: $q.platform.is.name + '-' + $q.platform.is.platform
-})
+// const form = ref({
+//   nik: '',
+//   nama: '',
+//   email: '',
+//   device_name: $q.platform.is.name + '-' + $q.platform.is.platform
+// })
 
 function onSubmit () {
-  storeAuth.login(form.value)
-}
-
-function toRegistrasi() {
-  routerInstance.replace('/registrasi')
+  storeForm.addRegister()
+  myForm.value.resetValidation()
 }
 
 </script>

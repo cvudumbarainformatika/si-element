@@ -19,10 +19,12 @@ export const useSurveyorTable = defineStore('surveyor_table', {
     },
     columns: [],
     columnHide: [
-      'id', 'uuid', 'created_at', 'user_id',
-      'user', 'provinsi', 'kabkot', 'kecamatan',
-      'kelurahan', 'kodepos', 'tanggal_lahir',
-      'tempat_lahir', 'no_hp', 'flag']
+      'id', 'user_id', 'tempat_lahir', 'tanggal_lahir',
+      'gender', 'agama', 'no_hp1', 'no_hp2',
+      'nama_npwp', 'nama_bank', 'no_rekening',
+      'nama_buku_tabungan', 'no_asuransi_bpjs', 'nilai_toefl', 'bidang_survei', 'status_kepegawaian',
+      'profesi', 'alamat', 'provinsi', 'kabkot', 'kecamatan', 'kelurahan', 'kodepos', 'domil_alamat', 'domil_provinsi',
+      'domil_kabkot', 'domil_kecamatan', 'domil_kelurahan', 'domil_kodepos', 'created_at', 'updated_at']
   }),
 
   getters: {
@@ -61,15 +63,16 @@ export const useSurveyorTable = defineStore('surveyor_table', {
       this.params.page = 1
       this.getDataTable()
     },
+
     async getDataTable () {
       this.loading = true
       const params = { params: this.params }
       try {
-        await api.get('/v1/surveyors', params).then(resp => {
+        await api.get('/v1/surveyor/all', params).then(resp => {
           console.log('items', resp)
           if (resp.status === 200) {
             this.items = resp.data.data
-            this.meta = resp.data.meta
+            this.meta = resp.data
             this.setColumns(resp.data.data)
             this.loading = false
           }
@@ -78,6 +81,7 @@ export const useSurveyorTable = defineStore('surveyor_table', {
         this.loading = false
       }
     },
+
     async deletesData (payload) {
       const params = { id: payload }
       try {

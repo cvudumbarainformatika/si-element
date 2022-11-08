@@ -33,6 +33,30 @@ const routes = [
       { path: '', component: () => import('pages/auth/AuthPage.vue') }
     ]
   },
+  {
+    path: '/registrasi',
+    component: () => import('layouts/Auth/AuthLayout.vue'),
+    meta: { requireAuth: false },
+    children: [
+      { path: '', component: () => import('pages/v1/surveyor/prasurveyor/IndexPage.vue') }
+    ]
+  },
+  {
+    path: '/notifregistrasi',
+    component: () => import('layouts/Auth/AuthLayout.vue'),
+    meta: { requireAuth: false },
+    children: [
+      { path: '', component: () => import('pages/v1/surveyor/prasurveyor/NotifRegister.vue') }
+    ]
+  },
+  {
+    path: '/veriregister',
+    component: () => import('layouts/Auth/AuthLayout.vue'),
+    meta: { requireAuth: true },
+    children: [
+      { path: '', component: () => import('pages/v1/surveyor/prasurveyor/VeriRegister.vue') }
+    ]
+  },
 
   // Always leave this as last one,
   // but you can also remove it
