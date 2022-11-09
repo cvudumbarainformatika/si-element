@@ -36,7 +36,7 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
       status_kepegawaian: '',
       profesi: '',
       alamat: '',
-      provinsi: '',
+      provinsi: 'jakarta',
       kabkot: '',
       kecamatan: '',
       kelurahan: '',
@@ -281,41 +281,13 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
 
     duplikatData() {
       if (this.cekbox === true) {
-        const formDuplikat = {
-          nik: this.form.nik,
-          nama_lengkap: this.form.nama_lengkap,
-          email: this.form.email,
-          tempat_lahir: this.form.tempat_lahir,
-          tanggal_lahir: this.form.tanggal_lahir,
-          gender: this.form.gender,
-          agama: this.form.agama,
-          no_hp1: this.form.no_hp1,
-          no_hp2: this.form.no_hp2,
-          nama_npwp: this.form.nama_npwp,
-          nama_bank: this.form.nama_bank,
-          no_rekening: this.form.no_rekening,
-          nama_buku_tabungan: this.form.nama_buku_tabungan,
-          no_asuransi_bpjs: this.form.no_asuransi_bpjs,
-          nilai_toefl: this.form.nilai_toefl,
-          bidang_survei: this.form.bidang_survei,
-          status_kepegawaian: this.form.status_kepegawaian,
-          profesi: this.form.profesi,
-          alamat: this.form.alamat,
-          provinsi: this.form.provinsi,
-          kabkot: this.form.kabkot,
-          kecamatan: this.form.kecamatan,
-          kelurahan: this.form.kelurahan,
-          kodepos: this.form.kodepos,
-          domil_alamat: this.form.alamat,
-          domil_provinsi: this.form.provinsi,
-          domil_kabkot: this.form.kabkot,
-          domil_kecamatan: this.form.kecamatan,
-          domil_kelurahan: this.form.kelurahan,
-          domil_kodepos: this.form.kodepos,
-          password_baru: this.form.password_baru,
-          password_baru_confirmation: this.form.password_baru_confirmation
-        }
-        this.saveForm(formDuplikat)
+        this.form.domil_alamat = this.form.alamat
+        this.form.domil_provinsi = this.form.provinsi
+        this.form.domil_kabkot = this.form.kabkot
+        this.form.domil_kecamatan = this.form.kecamatan
+        this.form.domil_kelurahan = this.form.kelurahan
+        this.form.domil_kodepos = this.form.kodepos
+        this.saveForm(this.form)
       } else {
         this.saveForm(this.form)
       }

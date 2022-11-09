@@ -1,5 +1,17 @@
 <template>
-  <q-page>
-    Profile
-  </q-page>
+  <Suspense>
+    <!-- main content -->
+    <AsyncComp />
+
+    <!-- loading state -->
+    <template #fallback>
+      <app-loading />
+    </template>
+  </Suspense>
 </template>
+<script setup>
+import { defineAsyncComponent } from 'vue'
+const AsyncComp = defineAsyncComponent(() =>
+  import('./ProfilePage.vue')
+)
+</script>
