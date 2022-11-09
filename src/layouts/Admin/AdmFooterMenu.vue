@@ -50,8 +50,9 @@ const props = defineProps({
 
 const store = useAuthStore()
 const role = computed(() => {
-  return store.user ? store.user.data.role : 'surveyor'
+  return store.user ? store.user.role : 'surveyor'
 })
+
 function filterMenu() {
   const arr = props.menus
   const a = arr.filter(function (item) {
