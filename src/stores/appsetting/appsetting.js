@@ -11,7 +11,17 @@ export const useAppSettingStore = defineStore('app_setting', {
         name: 'dashboard',
         link: 'dashboard',
         icon: 'icon-mat-dashboard',
-        submenus: []
+        submenus: [],
+        rules: [
+          {
+            id: 1,
+            name: 'admin'
+          },
+          {
+            id: 2,
+            name: 'surveyor'
+          }
+        ]
       },
       {
         id: 2,
@@ -19,7 +29,13 @@ export const useAppSettingStore = defineStore('app_setting', {
         name: 'surveyor',
         link: 'surveyor',
         icon: 'icon-mat-supervisor_account',
-        submenus: []
+        submenus: [],
+        rules: [
+          {
+            id: 1,
+            name: 'admin'
+          }
+        ]
       },
       {
         id: 3,
@@ -27,7 +43,13 @@ export const useAppSettingStore = defineStore('app_setting', {
         name: 'user',
         link: 'user',
         icon: 'icon-mat-person',
-        submenus: []
+        submenus: [],
+        rules: [
+          {
+            id: 1,
+            name: 'admin'
+          }
+        ]
       },
       {
         id: 4,
@@ -49,6 +71,12 @@ export const useAppSettingStore = defineStore('app_setting', {
             name: 'setting.themes',
             link: 'setting/themes',
             icon: ''
+          }
+        ],
+        rules: [
+          {
+            id: 1,
+            name: 'admin'
           }
         ]
       }
