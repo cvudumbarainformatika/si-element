@@ -11,7 +11,7 @@
           style="margin-top:30px"
         >
           <q-avatar>
-            <img src="~assets/logos/logo.png">
+            <img src="~assets/images/lipa.png">
           </q-avatar>
           <div class="text-h6 text-white">
             Halaman Login
