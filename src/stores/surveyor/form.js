@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import * as storage from 'src/modules/storage'
 import {
   axios,
   api
@@ -7,17 +6,20 @@ import {
 // import { routerInstance } from 'src/boot/router'
 import { notifSuccess } from 'src/modules/utils'
 import { useSurveyorTable } from 'src/stores/surveyor/table'
+import { routerInstance } from 'src/boot/router'
 // import { useAuthStore } from './auth'
 // import { Dialog } from 'quasar'
 
 export const useSurveyorFormStore = defineStore('surveyor_form', {
   state: () => ({
     isOpen: false,
-    user: localStorage.getItem('user') ? storage.getUser() : null,
+    user: null,
     form: {
       nik: '',
       nama_lengkap: '',
       email: '',
+      password_baru: '',
+      password_baru_confirmation: '',
       tempat_lahir: '',
       tanggal_lahir: '',
       gender: 'L',
@@ -72,7 +74,8 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
     loadingSelect: false,
     loading: false,
     edited: false,
-    step: 1
+    step: 1,
+    cekbox: false
   }),
 
   getters: {
@@ -249,40 +252,88 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
     async konfirmasiData(data) {
       const id = data.id
       this.form = data
+      this.loading = true
       try {
         await api.post(`/v1/surveyor/surveyoredit/${id}`, this.form).then(resp => {
           notifSuccess(resp)
-          this.form = {}
+          const table = useSurveyorTable()
+          table.getDataTable()
+          this.resetFORM()
+          this.loading = false
         })
       } catch (error) {
 
       }
     },
 
-    async getSurveyor() {
-      const id = this.user.surveyor.id
+    async getSurveyor(data) {
+      const id = data.surveyor.id
       try {
         await api.get(`/v1/surveyor/surveyorme/${id}`).then(resp => {
           console.log('data me', resp.data.data)
           this.form = resp.data.data
+          this.user = data.surveyor.id
         })
       } catch (error) {
 
       }
     },
 
-    async saveForm() {
-      const id = this.user.surveyor.id
+    duplikatData() {
+      if (this.cekbox === true) {
+        const formDuplikat = {
+          nik: this.form.nik,
+          nama_lengkap: this.form.nama_lengkap,
+          email: this.form.email,
+          tempat_lahir: this.form.tempat_lahir,
+          tanggal_lahir: this.form.tanggal_lahir,
+          gender: this.form.gender,
+          agama: this.form.agama,
+          no_hp1: this.form.no_hp1,
+          no_hp2: this.form.no_hp2,
+          nama_npwp: this.form.nama_npwp,
+          nama_bank: this.form.nama_bank,
+          no_rekening: this.form.no_rekening,
+          nama_buku_tabungan: this.form.nama_buku_tabungan,
+          no_asuransi_bpjs: this.form.no_asuransi_bpjs,
+          nilai_toefl: this.form.nilai_toefl,
+          bidang_survei: this.form.bidang_survei,
+          status_kepegawaian: this.form.status_kepegawaian,
+          profesi: this.form.profesi,
+          alamat: this.form.alamat,
+          provinsi: this.form.provinsi,
+          kabkot: this.form.kabkot,
+          kecamatan: this.form.kecamatan,
+          kelurahan: this.form.kelurahan,
+          kodepos: this.form.kodepos,
+          domil_alamat: this.form.alamat,
+          domil_provinsi: this.form.provinsi,
+          domil_kabkot: this.form.kabkot,
+          domil_kecamatan: this.form.kecamatan,
+          domil_kelurahan: this.form.kelurahan,
+          domil_kodepos: this.form.kodepos,
+          password_baru: this.form.password_baru,
+          password_baru_confirmation: this.form.password_baru_confirmation
+        }
+        this.saveForm(formDuplikat)
+      } else {
+        this.saveForm(this.form)
+      }
+    },
+
+    async saveForm(data) {
+      const id = this.user
+      console.log('id', this.user)
       this.loading = true
       try {
-        const resp = await api.post(`/v1/surveyor/updatefull/${id}`, this.form)
+        const resp = await api.post(`/v1/surveyor/updatefull/${id}`, data)
         console.log('save data', resp)
         notifSuccess(resp)
         // ini untuk panggil data table
         const table = useSurveyorTable()
         table.getDataTable()
+        routerInstance.push('/')
         this.resetFORM()
-        this.step = 3
         this.loading = false
         return new Promise((resolve) => {
           resolve(resp)
@@ -307,22 +358,23 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
       this.setToday()
       this.setForm('gender', 'L')
       this.setForm('agama', 'Islam')
+      this.user = null
     },
     newData () {
       this.resetFORM()
       this.edited = false
       this.isOpen = !this.isOpen
+    },
+    editData(val) {
+      console.log('datanya', val)
+      this.edited = true
+      const keys = Object.keys(val)
+      keys.forEach((key, index) => {
+        this.setForm(key, val[key])
+      })
+      // kecuali yang ada di object user
+      this.isOpen = !this.isOpen
     }
-    // editData(val) {
-    // console.log('datanya', val)
-    // this.edited = true
-    // const keys = Object.keys(val)
-    // keys.forEach((key, index) => {
-    //   this.setForm(key, val[key])
-    // })
-    // // kecuali yang ada di object user
-    // this.isOpen = !this.isOpen
-    // }
 
   }
 })

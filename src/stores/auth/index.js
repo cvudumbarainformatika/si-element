@@ -27,7 +27,7 @@ export const useAuthStore = defineStore('auth', {
       waitLoad('show')
       try {
         await api.post('/v1/auth/login', payload).then(resp => {
-          // console.log('login', resp.data.user.status)
+          console.log('login', resp)
           this.status = resp.data.user ? resp.data.user.status : null
           this.role = resp.data.user ? resp.data.user.role : null
           this.statusSurveyor = resp.data.user.surveyor ? resp.data.user.surveyor.status : null
@@ -96,10 +96,10 @@ export const useAuthStore = defineStore('auth', {
     },
     async getUser () {
       await api.get('/v1/auth/profile').then(resp => {
-        console.log('me', resp)
+        console.log('me', resp.data.data)
         if (resp.status === 200) {
-          storage.setUser(resp.data)
-          this.user = resp.data
+          storage.setUser(resp.data.data)
+          this.user = resp.data.data
         }
       })
     },

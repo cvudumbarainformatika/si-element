@@ -144,8 +144,10 @@ const props = defineProps({
 
 const store = useAuthStore()
 const role = computed(() => {
-  return store.user ? store.user.data.role : 'surveyor'
+  return store.user ? store.user.role : 'surveyor'
 })
+
+console.log('menudrawer', store.user)
 
 function filterMenu() {
   const arr = props.menus

@@ -52,7 +52,7 @@ const store = useAuthStore()
 const role = computed(() => {
   return store.user ? store.user.role : 'surveyor'
 })
-
+console.log('menufooter', store.user)
 function filterMenu() {
   const arr = props.menus
   const a = arr.filter(function (item) {

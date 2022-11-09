@@ -115,7 +115,7 @@
                 />
               </div>
               <div class="row">
-                <div class="col  q-gutter-xs q-px-xs">
+                <div class="col q-gutter-xs q-px-xs">
                   <app-autocomplete
                     v-model="store.form.provinsi"
                     outlined
@@ -125,41 +125,6 @@
                     option-label="name"
                     option-value="name"
                     @set-model="store.getKota"
-                  />
-                  <app-autocomplete
-                    v-model="store.form.kecamatan"
-                    outlined
-                    valid
-                    label="Kecamatan"
-                    autocomplete="name"
-                    :source="store.kecs"
-                    :disable="store.kecs.length===0"
-                    option-label="name"
-                    option-value="name"
-                    @set-model="store.getKels"
-                  />
-                  <app-input
-                    v-model="store.form.kodepos"
-                    outlined
-
-                    label="Kode pos"
-                  />
-                  <app-input
-                    v-model="store.form.nama_npwp"
-                    outlined
-
-                    label="Nama npwp"
-                  />
-                  <app-input
-                    v-model="store.form.nama_bank"
-                    outlined
-
-                    label="Nama bank"
-                  />
-                  <app-input
-                    v-model="store.form.no_asuransi_bpjs"
-                    outlined
-                    label="Nomor asuransi BPJS"
                   />
                 </div>
                 <div class="col q-gutter-xs q-px-xs">
@@ -174,6 +139,24 @@
                     option-value="name"
                     @set-model="store.getKec"
                   />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col q-gutter-xs q-px-xs">
+                  <app-autocomplete
+                    v-model="store.form.kecamatan"
+                    outlined
+                    valid
+                    label="Kecamatan"
+                    autocomplete="name"
+                    :source="store.kecs"
+                    :disable="store.kecs.length===0"
+                    option-label="name"
+                    option-value="name"
+                    @set-model="store.getKels"
+                  />
+                </div>
+                <div class="col q-gutter-xs q-px-xs">
                   <app-autocomplete
                     v-model="store.form.kelurahan"
                     outlined
@@ -185,6 +168,85 @@
                     option-label="name"
                     option-value="name"
                   />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col q-gutter-xs q-px-xs">
+                  <app-input
+                    v-model="store.form.kodepos"
+                    type="number"
+                    outlined
+                    label="Kode pos"
+                  />
+                </div>
+                <div class="col q-gutter-xs q-px-xs">
+                  <app-input
+                    v-model="store.form.nama_npwp"
+                    outlined
+                    label="Nama npwp"
+                  />
+                </div>
+                <div class="col q-gutter-xs q-px-xs">
+                  <q-select
+                    v-model="store.form.status_kepegawaian"
+                    :options="store.status_kepegawaians"
+                    label="Pilih Status Kepegawaian"
+                    dense
+                    outlined
+                    hide-bottom-space
+                    no-error-icon
+                    lazy-rules
+                    :rules="[(val) => (val && val.length > 0) || 'Harap diisi']"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col q-gutter-xs q-px-xs">
+                  <app-input
+                    v-model="store.form.nama_bank"
+                    outlined
+                    label="Nama bank"
+                  />
+                </div>
+                <div class="col q-gutter-xs q-px-xs">
+                  <app-input
+                    v-model="store.form.nama_buku_tabungan"
+                    outlined
+                    label="Nama di buku tabungan"
+                  />
+                </div>
+                <div class="col q-gutter-xs q-px-xs">
+                  <app-input
+                    v-model="store.form.no_rekening"
+                    type="number"
+                    outlined
+                    label="Nomor rekening"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col q-gutter-xs q-px-xs">
+                  <app-input
+                    v-model="store.form.no_asuransi_bpjs"
+                    type="number"
+                    outlined
+                    label="Nomor asuransi BPJS"
+                    lazy-rules
+                    :rules="[
+                      (val) => (val !== null && val !== '') || 'Harap diisi',
+                      (val) => (val.length <= 16 && val.length >= 16) || 'wajib 16 karakter',
+                    ]"
+                  />
+                </div>
+                <div class="col q-gutter-xs q-px-xs">
+                  <app-input
+                    v-model="store.form.nilai_toefl"
+                    type="number"
+                    outlined
+                    label="Nilai TOEFL"
+                  />
+                </div>
+                <div class="col q-gutter-xs q-px-xs">
                   <q-select
                     v-model="store.form.agama"
                     :options="store.agamas"
@@ -196,24 +258,6 @@
                     lazy-rules
                     :rules="[(val) => (val && val.length > 0) || 'Harap diisi']"
                   />
-                  <app-input
-                    v-model="store.form.nama_buku_tabungan"
-                    outlined
-
-                    label="Nama di buku tabungan"
-                  />
-                  <app-input
-                    v-model="store.form.no_rekening"
-                    outlined
-
-                    label="Nomor rekening"
-                  />
-                  <app-input
-                    v-model="store.form.nilai_toefl"
-                    outlined
-
-                    label="Nilai TOEFL"
-                  />
                 </div>
               </div>
               <div class="row ">
@@ -222,19 +266,6 @@
                     v-model="store.form.bidang_survei"
                     :options="store.bidang_surveis"
                     label="Pilih Bidang Survei"
-                    dense
-                    outlined
-                    hide-bottom-space
-                    no-error-icon
-                    lazy-rules
-                    :rules="[(val) => (val && val.length > 0) || 'Harap diisi']"
-                  />
-                </div>
-                <div class="col q-gutter-xs q-px-xs ">
-                  <q-select
-                    v-model="store.form.status_kepegawaian"
-                    :options="store.status_kepegawaians"
-                    label="Pilih Status Kepegawaian"
                     dense
                     outlined
                     hide-bottom-space
@@ -259,7 +290,7 @@
               </div>
               <div class="q-gutter-xs q-px-xs">
                 <q-checkbox
-                  v-model="cekbox"
+                  v-model="store.cekbox"
                   dense
                   label="Alamat domisili sama dengan alamat KTP"
                   color="primary"
@@ -270,7 +301,7 @@
                   v-model="store.form.domil_alamat"
                   outlined
                   label="Alamat"
-                  :disable="cekbox===true"
+                  :disable="store.cekbox===true"
                 />
               </div>
               <div class="row">
@@ -279,7 +310,7 @@
                     v-model="store.form.domil_provinsi"
                     outlined
                     label="Provinsi"
-                    :disable="cekbox===true"
+                    :disable="store.cekbox===true"
                     autocomplete="name"
                     :source="store.domil_provinces"
                     option-label="name"
@@ -295,7 +326,7 @@
                     label="Kabupaten / Kota"
                     autocomplete="name"
                     :source="store.domil_kotas"
-                    :disable="store.domil_kotas.length===0"
+                    :disable="store.domil_kotas.length===0 || store.cekbox===true"
                     option-label="name"
                     option-value="name"
                     @set-model="store.domil_getKec"
@@ -312,7 +343,7 @@
                     label="Kecamatan"
                     autocomplete="name"
                     :source="store.domil_kecs"
-                    :disable="store.domil_kecs.length===0"
+                    :disable="store.domil_kecs.length===0 || store.cekbox===true"
                     option-label="name"
                     option-value="name"
                     @set-model="store.domil_getKels"
@@ -326,7 +357,7 @@
                     label="Kelurahan"
                     autocomplete="name"
                     :source="store.domil_kels"
-                    :disable="store.domil_kecs.length===0"
+                    :disable="store.domil_kecs.length===0 || store.cekbox===true"
                     option-label="name"
                     option-value="name"
                   />
@@ -336,7 +367,7 @@
                     v-model="store.form.domil_kodepos"
                     outlined
                     label="Kode Pos"
-                    :disable="cekbox===true"
+                    :disable="store.cekbox===true"
                   />
                 </div>
               </div>
@@ -375,43 +406,13 @@
         </q-card>
       </q-step>
 
-      <q-step
-        :name="3"
-        title="Info akun anda"
-        icon="icon-mat-contact_mail"
-      >
-        <q-card class="text-primary myBorder">
-          <q-card-section>
-            <div class="text-h6">
-              Perhatian
-            </div>
-          </q-card-section>
-
-          <q-card-section class="q-pt-none">
-            Pasword berhasil di perbarui
-          </q-card-section>
-        </q-card>
-      </q-step>
-
       <template #navigation>
         <q-stepper-navigation class="q-gutter-md">
           <q-btn
-            v-show="store.step < 3"
+            v-show="store.step < 2"
             color="primary"
-            :label="store.step === 3 ? 'Beranda' : 'Continue'"
+            label="'Continue"
             @click="$refs.stepper.next()"
-          />
-          <q-btn
-            v-if="store.step === 3"
-            color="primary"
-            label="beranda"
-            @click="toDashboard"
-          />
-          <q-btn
-            v-if="store.step === 3"
-            color="negative"
-            label="Keluar"
-            @click="toLogout"
           />
           <q-btn
             v-if="store.step === 2"
@@ -421,7 +422,7 @@
             @click="lanjut"
           />
           <q-btn
-            v-if="store.step > 1 && store.step < 3"
+            v-if="store.step > 1 "
             flat
             color="primary"
             label="Back"
@@ -436,7 +437,6 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import AppInput from 'src/components/~global/AppInput.vue'
-import { routerInstance } from 'src/boot/router'
 import { useAuthStore } from 'src/stores/auth'
 import { useSurveyorFormStore } from 'src/stores/surveyor/form'
 
@@ -444,27 +444,20 @@ const store = useSurveyorFormStore()
 const storeAuth = useAuthStore()
 const error = ref(false)
 
-const cekbox = ref(false)
 store.getProvinces()
 store.domil_getProvinces()
 store.setToday()
 function lanjut() {
-  store.saveForm()
+  store.duplikatData()
 }
 
 // const toStep = computed(() => {
 //   return store ? store.step : "3";
 // });
 
-function toDashboard() {
-  routerInstance.push('/')
-}
-function toLogout() {
-  storeAuth.logout()
-}
-
 onMounted(() => {
-  store.getSurveyor()
+  const user = storeAuth.user
+  store.getSurveyor(user)
 })
 </script>
 <style scoped lang="scss">
