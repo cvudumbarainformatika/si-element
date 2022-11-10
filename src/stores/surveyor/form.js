@@ -36,7 +36,7 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
       status_kepegawaian: '',
       profesi: '',
       alamat: '',
-      provinsi: 'jakarta',
+      provinsi: '',
       kabkot: '',
       kecamatan: '',
       kelurahan: '',
@@ -75,7 +75,8 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
     loading: false,
     edited: false,
     step: 1,
-    cekbox: false
+    cekbox: false,
+    tab: 'biodatas'
   }),
 
   getters: {
@@ -279,6 +280,23 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
       }
     },
 
+    duplikatDataProfil() {
+      if (this.edited === true && this.cekbox === true) {
+        this.form.domil_alamat = this.form.alamat
+        this.form.domil_provinsi = this.form.provinsi
+        this.form.domil_kabkot = this.form.kabkot
+        this.form.domil_kecamatan = this.form.kecamatan
+        this.form.domil_kelurahan = this.form.kelurahan
+        this.form.domil_kodepos = this.form.kodepos
+        this.saveProfil(this.form)
+      } else if (this.edited === true) {
+        // console.log('form edit mloloh', this.form)
+        this.saveProfil(this.form)
+      } else {
+        console.log('Tidak di perbolehkan')
+      }
+    },
+
     duplikatData() {
       if (this.cekbox === true) {
         this.form.domil_alamat = this.form.alamat
@@ -312,6 +330,29 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
         })
       } catch (error) {
         this.step = 1
+        this.loading = false
+      }
+    },
+    async saveProfil(data) {
+      const id = this.user
+      console.log('id', this.user)
+      this.loading = true
+      try {
+        const resp = await api.post(`/v1/surveyor/updatefull/${id}`, data)
+        console.log('save data', resp)
+        notifSuccess(resp)
+        // ini untuk panggil data table
+        const table = useSurveyorTable()
+        table.getDataTable()
+        routerInstance.push('/profile')
+
+        this.edited = false
+        this.loading = false
+        return new Promise((resolve) => {
+          resolve(resp)
+        })
+      } catch (error) {
+        this.edited = true
         this.loading = false
       }
     },
