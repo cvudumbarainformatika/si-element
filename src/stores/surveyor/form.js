@@ -267,8 +267,16 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
       }
     },
 
+    cekIdProfil(data) {
+      if (data.surveyor !== null) {
+        this.getSurveyor(data)
+      } else {
+        console.log('kosong', data)
+      }
+    },
+
     async getSurveyor(data) {
-      const id = data.surveyor.id
+      const id = data.surveyor ? data.surveyor.id : data.id
       try {
         await api.get(`/v1/surveyor/surveyorme/${id}`).then(resp => {
           console.log('data me', resp.data.data)
