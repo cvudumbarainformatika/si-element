@@ -142,6 +142,7 @@ const props = defineProps({
 })
 
 const path = computed(() => useRoute().name)
+
 const aktif = (apem) => {
   const temp = apem.split('.')
   return temp[0]

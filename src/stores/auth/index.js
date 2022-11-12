@@ -31,7 +31,7 @@ export const useAuthStore = defineStore('auth', {
           this.status = resp.data.user ? resp.data.user.status : null
           this.role = resp.data.user ? resp.data.user.role : null
           this.statusSurveyor = resp.data.user.surveyor ? resp.data.user.surveyor.status : null
-          if (this.role === 'admin') {
+          if (this.role === 'admin' || this.role === 'root') {
             storage.setLocalToken(resp.data.token)
             storage.setUser(resp.data.user)
             const hdd = storage.getLocalToken()
