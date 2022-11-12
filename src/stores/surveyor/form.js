@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import * as storage from 'src/modules/storage'
 import {
   axios,
   api
@@ -7,17 +6,20 @@ import {
 // import { routerInstance } from 'src/boot/router'
 import { notifSuccess } from 'src/modules/utils'
 import { useSurveyorTable } from 'src/stores/surveyor/table'
+import { routerInstance } from 'src/boot/router'
 // import { useAuthStore } from './auth'
 // import { Dialog } from 'quasar'
 
 export const useSurveyorFormStore = defineStore('surveyor_form', {
   state: () => ({
     isOpen: false,
-    user: localStorage.getItem('user') ? storage.getUser() : null,
+    user: null,
     form: {
       nik: '',
       nama_lengkap: '',
       email: '',
+      password_baru: '',
+      password_baru_confirmation: '',
       tempat_lahir: '',
       tanggal_lahir: '',
       gender: 'L',
@@ -72,7 +74,9 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
     loadingSelect: false,
     loading: false,
     edited: false,
-    step: 1
+    step: 1,
+    cekbox: false,
+    tab: 'biodatas'
   }),
 
   getters: {
@@ -249,46 +253,114 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
     async konfirmasiData(data) {
       const id = data.id
       this.form = data
+      this.loading = true
       try {
         await api.post(`/v1/surveyor/surveyoredit/${id}`, this.form).then(resp => {
           notifSuccess(resp)
-          this.form = {}
+          const table = useSurveyorTable()
+          table.getDataTable()
+          this.resetFORM()
+          this.loading = false
         })
       } catch (error) {
 
       }
     },
 
-    async getSurveyor() {
-      const id = this.user.surveyor.id
+    cekIdProfil(data) {
+      if (data.surveyor !== null) {
+        this.getSurveyor(data)
+      } else {
+        console.log('kosong', data)
+      }
+    },
+
+    async getSurveyor(data) {
+      const id = data.surveyor ? data.surveyor.id : data.id
       try {
         await api.get(`/v1/surveyor/surveyorme/${id}`).then(resp => {
           console.log('data me', resp.data.data)
           this.form = resp.data.data
+          this.user = data.surveyor.id
         })
       } catch (error) {
 
       }
     },
 
-    async saveForm() {
-      const id = this.user.surveyor.id
+    duplikatDataProfil() {
+      if (this.edited === true && this.cekbox === true) {
+        this.form.domil_alamat = this.form.alamat
+        this.form.domil_provinsi = this.form.provinsi
+        this.form.domil_kabkot = this.form.kabkot
+        this.form.domil_kecamatan = this.form.kecamatan
+        this.form.domil_kelurahan = this.form.kelurahan
+        this.form.domil_kodepos = this.form.kodepos
+        this.saveProfil(this.form)
+      } else if (this.edited === true) {
+        // console.log('form edit mloloh', this.form)
+        this.saveProfil(this.form)
+      } else {
+        console.log('Tidak di perbolehkan')
+      }
+    },
+
+    duplikatData() {
+      if (this.cekbox === true) {
+        this.form.domil_alamat = this.form.alamat
+        this.form.domil_provinsi = this.form.provinsi
+        this.form.domil_kabkot = this.form.kabkot
+        this.form.domil_kecamatan = this.form.kecamatan
+        this.form.domil_kelurahan = this.form.kelurahan
+        this.form.domil_kodepos = this.form.kodepos
+        this.saveForm(this.form)
+      } else {
+        this.saveForm(this.form)
+      }
+    },
+
+    async saveForm(data) {
+      const id = this.user
+      console.log('id', this.user)
       this.loading = true
       try {
-        const resp = await api.post(`/v1/surveyor/updatefull/${id}`, this.form)
+        const resp = await api.post(`/v1/surveyor/updatefull/${id}`, data)
         console.log('save data', resp)
         notifSuccess(resp)
         // ini untuk panggil data table
         const table = useSurveyorTable()
         table.getDataTable()
+        routerInstance.push('/')
         this.resetFORM()
-        this.step = 3
         this.loading = false
         return new Promise((resolve) => {
           resolve(resp)
         })
       } catch (error) {
         this.step = 1
+        this.loading = false
+      }
+    },
+    async saveProfil(data) {
+      const id = this.user
+      console.log('id', this.user)
+      this.loading = true
+      try {
+        const resp = await api.post(`/v1/surveyor/updatefull/${id}`, data)
+        console.log('save data', resp)
+        notifSuccess(resp)
+        // ini untuk panggil data table
+        const table = useSurveyorTable()
+        table.getDataTable()
+        routerInstance.push('/profile')
+
+        this.edited = false
+        this.loading = false
+        return new Promise((resolve) => {
+          resolve(resp)
+        })
+      } catch (error) {
+        this.edited = true
         this.loading = false
       }
     },
@@ -307,22 +379,23 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
       this.setToday()
       this.setForm('gender', 'L')
       this.setForm('agama', 'Islam')
+      this.user = null
     },
     newData () {
       this.resetFORM()
       this.edited = false
       this.isOpen = !this.isOpen
+    },
+    editData(val) {
+      console.log('datanya', val)
+      this.edited = true
+      const keys = Object.keys(val)
+      keys.forEach((key, index) => {
+        this.setForm(key, val[key])
+      })
+      // kecuali yang ada di object user
+      this.isOpen = !this.isOpen
     }
-    // editData(val) {
-    // console.log('datanya', val)
-    // this.edited = true
-    // const keys = Object.keys(val)
-    // keys.forEach((key, index) => {
-    //   this.setForm(key, val[key])
-    // })
-    // // kecuali yang ada di object user
-    // this.isOpen = !this.isOpen
-    // }
 
   }
 })

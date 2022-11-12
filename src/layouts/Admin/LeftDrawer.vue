@@ -23,7 +23,7 @@
       style="height:calc(100%-60px) "
     >
       <div
-        v-for="(menu, i) in props.menus"
+        v-for="(menu, i) in filterMenu()"
         :key="i"
         @mouseenter="hover(menu,i)"
       >
@@ -129,6 +129,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
+import { useAuthStore } from 'src/stores/auth'
 
 const props = defineProps({
   dark: {
@@ -140,6 +141,24 @@ const props = defineProps({
     default: () => []
   }
 })
+
+const store = useAuthStore()
+const role = computed(() => {
+  return store.user ? store.user.role : 'surveyor'
+})
+
+console.log('menudrawer', store.user)
+
+function filterMenu() {
+  const arr = props.menus
+  const a = arr.filter(function (item) {
+    return item.rules
+      ? item.rules.some(function (group) {
+        return group.name === role.value
+      }) : null
+  })
+  return a
+}
 
 const path = computed(() => useRoute().name)
 

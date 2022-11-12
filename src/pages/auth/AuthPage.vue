@@ -51,15 +51,12 @@
             />
           </div>
         </q-form>
-        <div>
-          <p class="text-primary float-left">
-            Lupa password
-          </p>
+        <div class="q-pt-md">
           <p
-            class="text-primary float-right cursor-pointer"
+            class="text-primary text-center cursor-pointer"
             @click="toRegistrasi"
           >
-            Belum punya akun ?
+            <small> Belum punya akun ?</small>
           </p>
         </div>
       </q-card-section>

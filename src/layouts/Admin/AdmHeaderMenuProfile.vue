@@ -8,6 +8,7 @@
       <q-item
         v-close-popup
         clickable
+        @click="toProfile"
       >
         <q-item-section avatar>
           <q-icon
@@ -48,11 +49,15 @@
 </template>
 
 <script setup>
+import { routerInstance } from 'src/boot/router'
 import { useAuthStore } from 'src/stores/auth'
 
 const store = useAuthStore()
 
 function signOut() {
   store.logout()
+}
+function toProfile() {
+  routerInstance.push('/profile')
 }
 </script>
