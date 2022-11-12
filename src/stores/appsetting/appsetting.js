@@ -15,10 +15,14 @@ export const useAppSettingStore = defineStore('app_setting', {
         rules: [
           {
             id: 1,
-            name: 'admin'
+            name: 'root'
           },
           {
             id: 2,
+            name: 'admin'
+          },
+          {
+            id: 3,
             name: 'surveyor'
           }
         ]
@@ -33,6 +37,10 @@ export const useAppSettingStore = defineStore('app_setting', {
         rules: [
           {
             id: 1,
+            name: 'root'
+          },
+          {
+            id: 2,
             name: 'admin'
           }
         ]
@@ -47,6 +55,10 @@ export const useAppSettingStore = defineStore('app_setting', {
         rules: [
           {
             id: 1,
+            name: 'root'
+          },
+          {
+            id: 2,
             name: 'admin'
           }
         ]
@@ -76,6 +88,10 @@ export const useAppSettingStore = defineStore('app_setting', {
         rules: [
           {
             id: 1,
+            name: 'root'
+          },
+          {
+            id: 2,
             name: 'admin'
           }
         ]
