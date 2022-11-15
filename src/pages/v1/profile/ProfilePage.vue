@@ -572,12 +572,13 @@ const simpanGambar = () => {
   return new Promise((resolve, reject) => {
     api.post('v1/user/upload', form, {
       headers: {
+        'Access-Control-Allow-Origin': '*',
         'Content-Type': 'multipart/form-data'
       }
     })
       .then(resp => {
         notifSuccess(resp)
-        console.log('image resp', resp)
+        // console.log('image resp', resp)
         storeAuth.getUser()
         tempImg.value = null
         resolve(resp)

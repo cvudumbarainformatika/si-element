@@ -19,7 +19,7 @@
             :sort="table.params.sort"
             :loading="table.loading"
             :to-search="table.params.q"
-            :is-konfirm="table.status"
+            is-konfirm
             @set-order="table.setOder"
             @set-row="table.setPerPage"
             @goto="table.setPage"

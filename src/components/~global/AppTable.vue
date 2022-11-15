@@ -296,7 +296,7 @@
           </td>
           <td class="text-right">
             <q-btn
-              v-if="isKonfirm"
+              v-if="isKonfirm && item.status===1"
               flat
               class=""
               size="sm"
