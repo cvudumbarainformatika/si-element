@@ -19,7 +19,7 @@
             :sort="table.params.sort"
             :loading="table.loading"
             :to-search="table.params.q"
-            is-konfirm
+            :is-konfirm="table.status"
             @set-order="table.setOder"
             @set-row="table.setPerPage"
             @goto="table.setPage"
@@ -63,9 +63,19 @@
 import { useSurveyorTable } from 'src/stores/surveyor/table'
 import { useSurveyorFormStore } from 'src/stores/surveyor/form'
 import formDialog from './FormDialog.vue'
+import { ref } from 'vue'
 
 const table = useSurveyorTable()
 const store = useSurveyorFormStore()
+const stsSurveyor = ref(1)
 
+const konfirmasi = () => {
+  if (stsSurveyor.value === 1) {
+    table.status = true
+  } else {
+    table.status = false
+  }
+}
+konfirmasi()
 table.getDataTable()
 </script>

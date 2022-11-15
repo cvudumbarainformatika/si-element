@@ -6,6 +6,7 @@ import { notifErr, notifSuccess } from 'src/modules/utils'
 
 export const useSurveyorTable = defineStore('surveyor_table', {
   state: () => ({
+    status: '',
     items: [],
     meta: {},
     item: {},
@@ -72,6 +73,7 @@ export const useSurveyorTable = defineStore('surveyor_table', {
           console.log('items', resp)
           if (resp.status === 200) {
             this.items = resp.data.data
+            this.status = resp.data.data.status
             this.meta = resp.data
             this.setColumns(resp.data.data)
             this.loading = false
