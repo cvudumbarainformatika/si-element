@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { api } from 'src/boot/axios'
-import { notifErr, notifSuccess } from 'src/modules/utils'
+// import { notifErr, notifSuccess } from 'src/modules/utils'
 
 export const useUserTable = defineStore('user_table', {
   state: () => ({
@@ -64,20 +64,20 @@ export const useUserTable = defineStore('user_table', {
       } catch (error) {
         this.loading = false
       }
-    },
-
-    async deletesData(payload) {
-      const params = { id: payload }
-      try {
-        await api.post('/v1/user/destroy', params).then(resp => {
-          notifSuccess(resp)
-          this.getDataTable()
-        })
-      } catch (error) {
-        console.log('errDelete', error.response)
-        notifErr(error.response)
-      }
     }
+
+    // async deletesData(payload) {
+    //   const params = { id: payload }
+    //   try {
+    //     await api.post('/v1/user/destroy', params).then(resp => {
+    //       notifSuccess(resp)
+    //       this.getDataTable()
+    //     })
+    //   } catch (error) {
+    //     console.log('errDelete', error.response)
+    //     notifErr(error.response)
+    //   }
+    // }
   }
 
 })

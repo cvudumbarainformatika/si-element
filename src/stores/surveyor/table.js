@@ -19,7 +19,7 @@ export const useSurveyorTable = defineStore('surveyor_table', {
     },
     columns: [],
     columnHide: [
-      'id', 'user_id', 'tempat_lahir', 'tanggal_lahir',
+      'id', 'user_id', 'photo', 'tempat_lahir', 'tanggal_lahir',
       'gender', 'agama', 'no_hp1', 'no_hp2',
       'nama_npwp', 'nama_bank', 'no_rekening',
       'nama_buku_tabungan', 'no_asuransi_bpjs', 'nilai_toefl', 'bidang_survei', 'status_kepegawaian',

@@ -1,14 +1,29 @@
 <template>
   <div>
-    <q-page class=" text-center">
+    <q-page class="text-center">
       <q-card>
         <q-card-section>
-          <q-avatar
-            size="160px"
-            class="cursor-pointer bg-grey float-center"
-          >
-            <img src="~assets/images/No_image.png">
-          </q-avatar>
+          <div>
+            <q-avatar
+              size="160px"
+              class="cursor-pointer float-center"
+            >
+              <q-img
+                :src="imgUrl"
+                class="cursor-pointer"
+                @click="changeImage()"
+              />
+              <q-file
+                ref="fileRef"
+                v-model="tempImg"
+                filled
+                dense
+                label="Profile Thumnail"
+                accept="image/*"
+                @update:model-value="simpanGambar"
+              />
+            </q-avatar>
+          </div>
           <q-badge
             floating
             color="primary"
@@ -513,12 +528,29 @@
   </div>
 </template>
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useAuthStore } from 'src/stores/auth'
 import { useSurveyorFormStore } from 'src/stores/surveyor/form'
+import { api, storageServer } from 'src/boot/axios'
+import { notifSuccess } from 'src/modules/utils'
 
 const store = useSurveyorFormStore()
 const storeAuth = useAuthStore()
+
+const currentUser = storeAuth.user
+const fileRef = ref(null)
+const tempImg = ref(null)
+
+const imgUrl = ref(storeAuth.user.photo ? (storageServer + storeAuth.user.photo) : new URL('../../../assets/images/actor.svg', import.meta.url).href)
+console.log('imge name', imgUrl)
+watch(() => storeAuth.user, (apem) => {
+  // console.log('watch apem', apem)
+  if (apem) {
+    imgUrl.value = apem.photo !== null ? (storageServer + apem.photo) : new URL('../../../assets/images/actor.svg', import.meta.url).href
+  } else {
+    imgUrl.value = new URL('../../../assets/images/actor.svg', import.meta.url).href
+  }
+})
 
 store.getProvinces()
 store.domil_getProvinces()
@@ -527,11 +559,34 @@ store.setToday()
 function onSubmit() {
   store.duplikatDataProfil()
 }
-// const role = computed(() => {
-//   return storeAuth.user ? storeAuth.user.role : 'surveyor'
-// })
 
-// console.log('role', role.value)
+function changeImage() {
+  fileRef.value.pickFiles()
+}
+const simpanGambar = () => {
+  // console.log('simpan GaMN', tempImg.value)
+  const form = new FormData()
+  form.append('id', currentUser.id)
+  form.append('gambar', tempImg.value.name)
+  // console.log('simpan', tempImg.val)
+  return new Promise((resolve, reject) => {
+    api.post('v1/user/upload', form, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+      .then(resp => {
+        notifSuccess(resp)
+        console.log('image resp', resp)
+        storeAuth.getUser()
+        tempImg.value = null
+        resolve(resp)
+      })
+      .catch(err => {
+        reject(err)
+      })
+  })
+}
 
 function onReset() {
   const user = storeAuth.user
@@ -549,4 +604,8 @@ onMounted(() => {
 .myBorder {
   border-left: 4px solid rgb(0, 0, 153);
   color: blue;
-}</style>
+}
+.myBtn{
+  z-index: 50 !important;
+}
+</style>
