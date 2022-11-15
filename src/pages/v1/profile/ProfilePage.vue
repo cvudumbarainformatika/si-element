@@ -564,10 +564,10 @@ function changeImage() {
   fileRef.value.pickFiles()
 }
 const simpanGambar = () => {
-  // console.log('simpan GaMN', tempImg.value)
+  // console.log('simpan GaMN', tempImg.value.name)
   const form = new FormData()
   form.append('id', currentUser.id)
-  form.append('gambar', tempImg.value.name)
+  form.append('gambar', tempImg.value)
   // console.log('simpan', tempImg.val)
   return new Promise((resolve, reject) => {
     api.post('v1/user/upload', form, {
