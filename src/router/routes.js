@@ -42,6 +42,14 @@ const routes = [
     ]
   },
   {
+    path: '/regpuskesmas',
+    component: () => import('layouts/Auth/AuthLayout.vue'),
+    meta: { requireAuth: false },
+    children: [
+      { path: '', component: () => import('pages/v1/puskesmas/prapuskesmas/IndexPage.vue') }
+    ]
+  },
+  {
     path: '/notifregistrasi',
     component: () => import('layouts/Auth/AuthLayout.vue'),
     meta: { requireAuth: false },

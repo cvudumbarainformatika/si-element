@@ -51,22 +51,33 @@
             />
           </div>
         </q-form>
-        <div class="q-pt-md">
+        <div class="q-pt-md flex flex-center q-gutter-x-xl">
           <p
             class="text-primary text-center cursor-pointer"
-            @click="toRegistrasi"
+            @click="toRegSurveyor"
           >
-            <small> Belum punya akun ?</small>
+            <small> Surveyor</small>
+          </p>
+          <p
+            class="text-primary text-center q-pb-md"
+          >
+            REGISTRASI
+          </p>
+          <p
+            class="text-primary text-center cursor-pointer"
+            @click="toRegPuskesmas"
+          >
+            <small> Puskesmas</small>
           </p>
         </div>
       </q-card-section>
-      <div class="absolute-bottom q-pa-lg text-grey-6">
+      <div class="float-bottom q-px-md text-grey-6">
         <q-separator />
         <div class="">
           Aplikasi LIPA MITRA ini
           tidak di perjualbelikan secara bebas tanpa seizin dari pembuatnya.
         </div>
-        <div class="q-mt-lg text-right f-14">
+        <div class="q-mt-lg q-pb-xs text-right f-14">
           LIPA MITRA Versi BETA
         </div>
       </div>
@@ -93,8 +104,11 @@ function onSubmit () {
   storeAuth.login(form.value)
 }
 
-function toRegistrasi() {
+function toRegSurveyor() {
   routerInstance.replace('/registrasi')
+}
+function toRegPuskesmas() {
+  routerInstance.replace('/regpuskesmas')
 }
 
 </script>

@@ -14,7 +14,7 @@
             <img src="~assets/images/lipa.png">
           </q-avatar>
           <div class="text-h6 text-white">
-            Registrasi Surveyor
+            Registrasi Puskesmas
           </div>
           <div class="text-white">
             Silahkan Anda Registrasi Terlebih Dahulu
@@ -86,11 +86,11 @@
 import { ref } from 'vue'
 // import { useQuasar } from 'quasar'
 // import { useAuthStore } from 'src/stores/auth'
-import { usePrasurveyorForm } from 'src/stores/surveyor/prasurveyor/form'
+import { usePrapuskesmasForm } from 'src/stores/puskesmas/prapuskesmas/form'
 import { routerInstance } from 'src/boot/router'
 
 // const storeAuth = useAuthStore()
-const storeForm = usePrasurveyorForm()
+const storeForm = usePrapuskesmasForm()
 // const $q = useQuasar()
 
 const myForm = ref(null)
@@ -102,7 +102,8 @@ const myForm = ref(null)
 // })
 
 function onSubmit () {
-  storeForm.addRegister()
+  // storeForm.addRegister()
+  console.log('form', storeForm.form)
   myForm.value.resetValidation()
 }
 function toLogin() {
