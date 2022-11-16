@@ -329,7 +329,7 @@
               </q-tooltip>
             </q-btn>
             <q-btn
-              v-if="selected.length < 2"
+              v-if="selected.length < 2 && btnDelete"
               flat
               class=""
               size="sm"
@@ -399,7 +399,8 @@ const props = defineProps({
   sort: { type: String, default: 'desc' },
   toSearch: { type: String, default: '' },
   isChecked: { type: Boolean, default: false },
-  isKonfirm: { type: Boolean, default: false }
+  isKonfirm: { type: Boolean, default: false },
+  btnDelete: { type: Boolean, default: false }
 
 })
 const emits = defineEmits(['newData', 'editData', 'goto', 'deleteIds', 'setRow', 'setColumns', 'setOrder', 'find', 'delete', 'refresh', 'konfirmData'])

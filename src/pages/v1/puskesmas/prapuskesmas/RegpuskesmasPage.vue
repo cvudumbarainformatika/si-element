@@ -121,7 +121,7 @@ function toLogin() {
     &::before {
       content: "";
       width:360px;
-      height:230px;
+      height:240px;
       position: absolute;
       border-radius: 0 0 50% 50%;
       background: linear-gradient(-45deg, $secondary, $primary);

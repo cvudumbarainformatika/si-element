@@ -20,6 +20,7 @@
             :loading="table.loading"
             :to-search="table.params.q"
             is-konfirm
+            btn-delete
             @set-order="table.setOder"
             @set-row="table.setPerPage"
             @goto="table.setPage"

@@ -5,7 +5,7 @@
         <q-card-section>
           <div>
             <q-avatar
-              size="160px"
+              size="180px"
               class="cursor-pointer float-center"
             >
               <q-img
@@ -23,6 +23,14 @@
                 @update:model-value="simpanGambar"
               />
             </q-avatar>
+            <q-btn
+              round
+              color="primary"
+              size="xs"
+              icon="icon-mat-photo_camera"
+              class="float-bottom"
+              style="top: 55px; right: 50px; transform: translateY(50%);"
+            />
           </div>
           <q-badge
             floating
