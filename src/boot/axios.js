@@ -5,8 +5,8 @@ import { noftifResp, notifErr } from 'src/modules/utils'
 import { setCssVar, Screen } from 'quasar'
 
 // const SERVER = 'http://api.si-element.test'
-const SERVER = 'http://localhost/api.si-element/public'
-// const SERVER = 'https://server.udumbarainformatika.my.id/api'
+// const SERVER = 'http://localhost/api.si-element/public'
+const SERVER = 'https://servlipa.udumbarainformatika.my.id'
 const base = SERVER + '/api'
 const storageServer = SERVER + '/storage/'
 
