@@ -60,18 +60,16 @@ const notifErr = (resp, next) => {
       })
     };
   } else if (status === 422) {
-    const msgs = resp.data
-    for (const key in msgs) {
-      Notify.create({
-        message: msgs[key][0],
-        icon: 'icon-eva-message_circle_outline',
-        position: 'bottom-right',
-        color: 'negative',
-        actions: [
-          { label: 'Dismiss', color: 'yellow', handler: () => { /* console.log('wooow') */ } }
-        ]
-      })
-    }
+    const msgs = resp.data.message
+    Notify.create({
+      message: msgs,
+      icon: 'icon-eva-message_circle_outline',
+      position: 'bottom-right',
+      color: 'negative',
+      actions: [
+        { label: 'Dismiss', color: 'yellow', handler: () => { /* console.log('wooow') */ } }
+      ]
+    })
   } else {
     const attempt = parseFloat(localStorage.getItem('attempt'))
     console.log('attempt', attempt)
