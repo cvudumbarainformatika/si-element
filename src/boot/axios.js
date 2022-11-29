@@ -6,7 +6,8 @@ import { setCssVar, Screen } from 'quasar'
 
 // const SERVER = 'http://api.si-element.test'
 // const SERVER = 'http://localhost/api.si-element/public'
-const SERVER = 'https://servlipa.udumbarainformatika.my.id'
+const SERVER = 'http://127.0.0.1:8000'
+// const SERVER = 'https://servlipa.udumbarainformatika.my.id'
 const base = SERVER + '/api'
 const storageServer = SERVER + '/storage/'
 

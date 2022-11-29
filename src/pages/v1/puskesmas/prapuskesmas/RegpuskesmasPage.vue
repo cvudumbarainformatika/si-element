@@ -28,18 +28,18 @@
         >
           <div class="q-gutter-sm">
             <app-input
-              v-model="storeForm.form.nik"
-              label="nik"
+              v-model="storeForm.form.nomor"
+              label="Nomor"
               type="number"
               icon="icon-mat-pin"
               lazy-rules
               :rules="[
                 (val) => (val !== null && val !== '') || 'Harap diisi',
-                (val) => (val.length <= 16 && val.length >= 16) || 'wajib 16 karakter',
+                (val) => (val.length <= 4 && val.length >= 4) || 'wajib 4 karakter',
               ]"
             />
             <app-input
-              v-model="storeForm.form.nama_lengkap"
+              v-model="storeForm.form.nama"
               label="nama"
               icon="icon-mat-person"
             />
@@ -102,7 +102,7 @@ const myForm = ref(null)
 // })
 
 function onSubmit () {
-  // storeForm.addRegister()
+  storeForm.addRegister()
   console.log('form', storeForm.form)
   myForm.value.resetValidation()
 }
