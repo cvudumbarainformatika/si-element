@@ -29,24 +29,6 @@ export const useAppSettingStore = defineStore('app_setting', {
       },
       {
         id: 2,
-        nama: 'surveyor',
-        name: 'surveyor',
-        link: 'surveyor',
-        icon: 'icon-mat-supervisor_account',
-        submenus: [],
-        rules: [
-          {
-            id: 1,
-            name: 'root'
-          },
-          {
-            id: 2,
-            name: 'admin'
-          }
-        ]
-      },
-      {
-        id: 3,
         nama: 'user',
         name: 'user',
         link: 'user',
@@ -64,7 +46,43 @@ export const useAppSettingStore = defineStore('app_setting', {
         ]
       },
       {
+        id: 3,
+        nama: 'surveyor',
+        name: 'surveyor',
+        link: 'surveyor',
+        icon: 'icon-mat-supervisor_account',
+        submenus: [],
+        rules: [
+          {
+            id: 1,
+            name: 'root'
+          },
+          {
+            id: 2,
+            name: 'admin'
+          }
+        ]
+      },
+      {
         id: 4,
+        nama: 'puskesmas',
+        name: 'puskesmas',
+        link: 'puskesmas',
+        icon: 'icon-mat-group',
+        submenus: [],
+        rules: [
+          {
+            id: 1,
+            name: 'root'
+          },
+          {
+            id: 2,
+            name: 'admin'
+          }
+        ]
+      },
+      {
+        id: 5,
         nama: 'setting',
         name: 'setting',
         link: 'setting',
