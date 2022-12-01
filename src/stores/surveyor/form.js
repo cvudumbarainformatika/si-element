@@ -79,10 +79,6 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
     tab: 'biodatas'
   }),
 
-  getters: {
-
-  },
-
   actions: {
     async getProvinces (id) {
       await axios.get(`${this.api_wilayah}/provinces.json`)
