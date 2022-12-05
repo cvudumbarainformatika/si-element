@@ -83,6 +83,46 @@ export const useAppSettingStore = defineStore('app_setting', {
       },
       {
         id: 5,
+        nama: 'master',
+        name: 'master',
+        link: 'master',
+        icon: 'icon-mat-settings',
+        submenus: [
+          {
+            id: 1,
+            nama: 'bidang survei',
+            name: 'master.bidangSurvei',
+            link: 'master/bidangSurvei',
+            icon: ''
+          },
+          {
+            id: 2,
+            nama: 'status kepegawaian',
+            name: 'master.statusKepegawaian',
+            link: 'master/statusKepegawaian',
+            icon: ''
+          },
+          {
+            id: 2,
+            nama: 'profesi',
+            name: 'master.profesi',
+            link: 'master/profesi',
+            icon: ''
+          }
+        ],
+        rules: [
+          {
+            id: 1,
+            name: 'root'
+          },
+          {
+            id: 2,
+            name: 'admin'
+          }
+        ]
+      },
+      {
+        id: 6,
         nama: 'setting',
         name: 'setting',
         link: 'setting',

@@ -9,7 +9,7 @@ const routes = [
       { path: '/dashboard', name: 'dashboard', component: () => import('pages/IndexPage.vue') },
       { path: '/surveyor', name: 'surveyor', component: () => import('pages/v1/surveyor/IndexPage.vue') },
       { path: '/puskesmas', name: 'puskesmas', component: () => import('pages/v1/puskesmas/IndexPage.vue') },
-      { path: '/master', name: 'master', component: () => import('pages/v1/master/IndexPage.vue') },
+      // { path: '/master', name: 'master', component: () => import('pages/v1/master/IndexPage.vue') },
       { path: '/user', name: 'user', component: () => import('pages/v1/user/IndexPage.vue') },
       {
         path: '/setting',
@@ -19,6 +19,17 @@ const routes = [
           { path: '/setting', redirect: '/setting/info' },
           { path: '/setting/info', name: 'setting.info', component: () => import('pages/v1/setting/info/InfoPage.vue') },
           { path: '/setting/themes', name: 'setting.themes', component: () => import('pages/v1/setting/theme/ThemesPage.vue') }
+        ]
+      },
+      {
+        path: '/master',
+        name: 'master',
+        component: () => import('pages/v1/master/IndexPage.vue'),
+        children: [
+          { path: '/master', redirect: '/master/bidangSurvei' },
+          { path: '/master/bidangSurvei', name: 'master.bidangSurvei', component: () => import('pages/v1/master/bidangSurvei/BidangSurvei.vue') },
+          { path: '/master/statusKepegawaian', name: 'master.statusKepegawaian', component: () => import('pages/v1/master/statusKepegawaian/StatusKepegawaian.vue') },
+          { path: '/master/profesi', name: 'master.profesi', component: () => import('pages/v1/master/profesi/ProfesiPage.vue') }
         ]
       },
       { path: '/profile', name: 'profile', component: () => import('pages/v1/profile/IndexPage.vue') }
