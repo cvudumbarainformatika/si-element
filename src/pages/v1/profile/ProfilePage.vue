@@ -573,20 +573,24 @@ function changeImage() {
 }
 const simpanGambar = () => {
   // console.log('simpan GaMN', tempImg.value.name)
+  // const form = {
+  //   satu: 'aja',
+  //   id: currentUser.id
+  // }
   const form = new FormData()
   form.append('id', currentUser.id)
   form.append('gambar', tempImg.value)
   // console.log('simpan', tempImg.val)
   return new Promise((resolve, reject) => {
+    // api.post('v1/user/upload', form)
     api.post('v1/user/upload', form, {
       headers: {
-        'Access-Control-Allow-Origin': '*',
         'Content-Type': 'multipart/form-data'
       }
     })
       .then(resp => {
         notifSuccess(resp)
-        // console.log('image resp', resp)
+        console.log('image resp', resp)
         storeAuth.getUser()
         tempImg.value = null
         resolve(resp)
