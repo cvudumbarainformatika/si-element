@@ -37,7 +37,7 @@ export const useBidangSurveiFormStore = defineStore('bidangSurvei_form', {
     async saveForm() {
       this.loading = true
       try {
-        const resp = await api.post('/v1/master/store', this.form)
+        const resp = await api.post('/v1/bidangsurvei/store', this.form)
         notifSuccess(resp)
         this.setOpen()
         const table = useBidangSurveiTable()

@@ -55,8 +55,8 @@ export const useBidangSurveiTable = defineStore('bidangSuvei_table', {
       this.loading = true
       const params = { params: this.params }
       try {
-        await api.get('/v1/master/all', params).then(resp => {
-          console.log('items master', resp.data)
+        await api.get('/v1/bidangsurvei/all', params).then(resp => {
+          // console.log('items bidangsurvei', resp.data)
           if (resp.status === 200) {
             this.items = resp.data.data
             this.meta = resp.data
@@ -72,7 +72,7 @@ export const useBidangSurveiTable = defineStore('bidangSuvei_table', {
       const params = { id: payload }
       // console.log('delete data', params)
       try {
-        await api.post('v1/master/destroy', params).then(resp => {
+        await api.post('v1/bidangsurvei/destroy', params).then(resp => {
           notifSuccess(resp)
           this.getDataTable()
         })
