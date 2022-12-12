@@ -38,10 +38,7 @@
           </q-tab-panel>
 
           <q-tab-panel name="status kepegawaian">
-            <div class="text-h6">
-              status kepegawaian
-            </div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            <status-kp-page />
           </q-tab-panel>
 
           <q-tab-panel name="provesi">
@@ -58,6 +55,7 @@
 <script setup>
 import { ref } from 'vue'
 import bidangPage from '../master/bidangsurvei/BidangPage.vue'
+import StatusKpPage from './statuskepegawaian/StatusKpPage.vue'
 const tab = ref('bidang survei')
 
 </script>

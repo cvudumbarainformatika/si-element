@@ -1,16 +1,16 @@
 import { defineStore } from 'pinia'
 import { api } from 'src/boot/axios'
 import { notifSuccess } from 'src/modules/utils'
-import { useBidangSurveiTable } from './table'
+import { useStatusKepegawaianTable } from './table'
 
-export const useBidangSurveiFormStore = defineStore('bidangSurvei_form', {
+export const useStatusKepegawaianFormStore = defineStore('statusKepegawaian_form', {
   state: () => ({
     isOpen: false,
     form: {
       nama: ''
     },
     loading: false,
-    tab: 'bidang survei'
+    tab: 'status kepegawaian'
   }),
   actions: {
     setForm(name, val) {
@@ -21,9 +21,7 @@ export const useBidangSurveiFormStore = defineStore('bidangSurvei_form', {
     },
     resetFORM() {
       this.form = {}
-      const columns = [
-        'nama'
-      ]
+      const columns = ['nama']
       for (let i = 0; i < columns.length; i++) {
         this.setForm(columns[i], '')
       }
@@ -32,17 +30,17 @@ export const useBidangSurveiFormStore = defineStore('bidangSurvei_form', {
       this.resetFORM()
       this.isOpen = !this.isOpen
     },
-
     async saveForm() {
       this.loading = true
       try {
-        const resp = await api.post('/v1/bidangsurvei/store', this.form)
+        const resp = await api.post('/v1/statusKp/store', this.form)
         notifSuccess(resp)
         this.setOpen()
-        const table = useBidangSurveiTable()
+        const table = useStatusKepegawaianTable()
         table.getDataTable()
         this.resetFORM()
         this.loading = false
+        this.tab = 'status kepegawaian'
         return new Promise((resolve) => {
           resolve(resp)
         })
