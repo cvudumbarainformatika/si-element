@@ -17,6 +17,7 @@
             :to-search="table.params.q"
             is-konfirm
             btn-delete
+            is-new-data
             @set-order="table.setOrder"
             @set-row="table.setPerPage"
             @goto="table.setPage"

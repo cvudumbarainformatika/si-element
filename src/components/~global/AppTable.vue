@@ -145,6 +145,7 @@
         </q-btn>
         <!-- data baru -->
         <q-btn
+          v-if="isNewData"
           class="q-ml-sm"
           unelevated
           round
@@ -400,8 +401,8 @@ const props = defineProps({
   toSearch: { type: String, default: '' },
   isChecked: { type: Boolean, default: false },
   isKonfirm: { type: Boolean, default: false },
-  btnDelete: { type: Boolean, default: false }
-
+  btnDelete: { type: Boolean, default: false },
+  isNewData: { type: Boolean, default: false }
 })
 const emits = defineEmits(['newData', 'editData', 'goto', 'deleteIds', 'setRow', 'setColumns', 'setOrder', 'find', 'delete', 'refresh', 'konfirmData'])
 

@@ -363,7 +363,7 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
     resetFORM () {
       this.form = {}
       const columns = [
-        'id', 'user_id', 'photo', 'tempat_lahir', 'tanggal_lahir',
+        'user_id', 'photo', 'tempat_lahir', 'tanggal_lahir',
         'gender', 'agama', 'no_hp1', 'no_hp2',
         'nama_npwp', 'nama_bank', 'no_rekening',
         'nama_buku_tabungan', 'no_asuransi_bpjs', 'nilai_toefl', 'bidang_survei', 'status_kepegawaian',
@@ -383,7 +383,7 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
       this.isOpen = !this.isOpen
     },
     editData(val) {
-      console.log('datanya', val)
+      console.log('datanya edit', val)
       this.edited = true
       const keys = Object.keys(val)
       keys.forEach((key, index) => {

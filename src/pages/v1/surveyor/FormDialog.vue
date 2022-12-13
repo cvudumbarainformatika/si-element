@@ -22,7 +22,7 @@
             </div>
             <div class="col-md-6 col-xs-12">
               <app-input
-                v-model="store.form.nama"
+                v-model="store.form.nama_lengkap"
                 label="Nama*"
                 outlined
               />
@@ -130,7 +130,7 @@
             </div>
             <div class="col-md-6 col-xs-12">
               <app-input
-                v-model="store.form.no_hp"
+                v-model="store.form.no_hp1"
                 label="no Hp"
                 outlined
                 valid
