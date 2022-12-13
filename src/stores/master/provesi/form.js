@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
 import { api } from 'src/boot/axios'
 import { notifSuccess } from 'src/modules/utils'
-import { useStatusKepegawaianTable } from './table'
+import { useProvesiTable } from './table'
 
-export const useStatusKepegawaianFormStore = defineStore('statusKepegawaian_form', {
+export const useProvesiFormStore = defineStore('provesi_form', {
   state: () => ({
     isOpen: false,
     form: {
@@ -33,19 +33,16 @@ export const useStatusKepegawaianFormStore = defineStore('statusKepegawaian_form
     async saveForm() {
       this.loading = true
       try {
-        const resp = await api.post('/v1/statusKp/store', this.form)
+        const resp = await api.post('/v1/provesi/store', this.form)
         notifSuccess(resp)
         this.setOpen()
-        const table = useStatusKepegawaianTable()
+        const table = useProvesiTable()
         table.getDataTable()
         this.resetFORM()
         this.loading = false
-        this.tab = 'status kepegawaian'
-        return new Promise((resolve) => {
-          resolve(resp)
-        })
+        this.tab = 'provesi'
       } catch (error) {
-        this.tab = 'status kepegawaian'
+        this.tab = 'provesi'
         this.loading = false
       }
     },

@@ -42,10 +42,7 @@
           </q-tab-panel>
 
           <q-tab-panel name="provesi">
-            <div class="text-h6">
-              provesi
-            </div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            <provesi-page />
           </q-tab-panel>
         </q-tab-panels>
       </q-card>
@@ -54,8 +51,9 @@
 </template>
 <script setup>
 import { ref } from 'vue'
-import bidangPage from '../master/bidangsurvei/BidangPage.vue'
+import BidangPage from '../master/bidangsurvei/BidangPage.vue'
 import StatusKpPage from './statuskepegawaian/StatusKpPage.vue'
+import ProvesiPage from './provesi/ProvesiPage.vue'
 const tab = ref('bidang survei')
 
 </script>
