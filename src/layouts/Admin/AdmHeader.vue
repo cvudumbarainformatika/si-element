@@ -107,7 +107,7 @@
           size="40px"
           class="q-ml-sm cursor-pointer bg-grey"
         >
-          <img src="~assets/images/actor.svg">
+          <img :src="image">
           <adm-header-menu-profile />
         </q-avatar>
       </div>
@@ -119,7 +119,11 @@
 import { useAppSettingStore } from 'src/stores/appsetting/appsetting'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+import { useAuthStore } from 'src/stores/auth'
+import { storageServer } from 'src/boot/axios'
 import AdmHeaderMenuProfile from './AdmHeaderMenuProfile.vue'
+
+const store = useAuthStore()
 const emit = defineEmits(['toggleLeft'])
 defineProps({
   dark: {
@@ -141,6 +145,19 @@ const menu = computed(() => {
   if (menus.length) return menus[0]
   else return false
 })
+
+const image = computed(() => {
+  let imgUrl = new URL('../../assets/images/actor.svg', import.meta.url).href
+  if (store.user) {
+    if (store.user.photo) {
+      imgUrl = storageServer + store.user.photo
+    } else {
+      imgUrl = new URL('../../assets/images/actor.svg', import.meta.url).href
+    }
+  }
+  return imgUrl
+})
+
 </script>
 
 <style lang="scss" scoped>
