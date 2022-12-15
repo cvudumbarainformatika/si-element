@@ -27,6 +27,58 @@
                 outlined
               />
             </div>
+            <div class="col-md-6 col-xs-12">
+              <app-input
+                v-model="store.form.no_hp1"
+                label="Nomor Handphone 1"
+                outlined
+                valid
+              />
+            </div>
+            <div class="col-md-6 col-xs-12">
+              <app-input
+                v-model="store.form.no_hp2"
+                label="Nomor Handphone 2"
+                outlined
+                valid
+              />
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <app-input
+                v-model="store.form.tempat_lahir"
+                label="Tempal Lahir"
+                outlined
+                valid
+              />
+            </div>
+
+            <div class="col-md-4 col-xs-12">
+              <app-input-date
+                valid
+                :model="store.form.tanggal_lahir"
+                icon="icon-mat-event"
+                label="Tanggal Lahir"
+                outlined
+                @set-model="(val)=>store.setForm('tanggal_lahir', val)"
+              />
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <q-select
+                v-model="store.form.gender"
+                :options="store.genders"
+                label="Jenis Kelamin"
+                option-value="id"
+                option-label="name"
+                emit-value
+                map-options
+                dense
+                outlined
+                hide-bottom-space
+                no-error-icon
+                lazy-rules
+                :rules="[(val) => (val && val.length > 0) || 'Harap diisi']"
+              />
+            </div>
             <div class="col-md-12 col-xs-12">
               <app-input
                 v-model="store.form.alamat"
@@ -89,30 +141,12 @@
                 option-value="name"
               />
             </div>
-            <div class="col-md-4 col-xs-12">
+            <div class="col-md-6 col-xs-12">
               <app-input
                 v-model="store.form.kodepos"
-                label="Kodepos"
-                outlined
                 valid
-              />
-            </div>
-            <div class="col-md-4 col-xs-12">
-              <app-input
-                v-model="store.form.tempat_lahir"
-                label="Tempat lahir"
+                label="Kode Pos"
                 outlined
-                valid
-              />
-            </div>
-            <div class="col-md-4 col-xs-12">
-              <app-input-date
-                valid
-                :model="store.form.tanggal_lahir"
-                icon="icon-mat-event"
-                label="Tanggal Lahir"
-                outlined
-                @set-model="(val)=>store.setForm('tanggal_lahir', val)"
               />
             </div>
             <div class="col-md-6 col-xs-12">
@@ -128,12 +162,155 @@
                 :rules="[(val) => (val && val.length > 0) || 'Harap diisi']"
               />
             </div>
+            <div class="col-md-4 col-xs-12">
+              <app-input
+                v-model="store.form.nama_bank"
+                valid
+                label="Nama Bank"
+                outlined
+              />
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <app-input
+                v-model="store.form.nama_buku_tabungan"
+                valid
+                label="Nama di buku tabungan"
+                outlined
+              />
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <app-input
+                v-model="store.form.no_rekening"
+                valid
+                label="Nomor Rekening"
+                outlined
+              />
+            </div>
             <div class="col-md-6 col-xs-12">
               <app-input
-                v-model="store.form.no_hp1"
-                label="no Hp"
+                v-model="store.form.no_asuransi_bpjs"
+                type="number"
+                outlined
+                label="Nomor asuransi BPJS"
+                lazy-rules
+                :rules="[
+                  (val) => (val !== null && val !== '') || 'Harap diisi',
+                  (val) => (val.length <= 16 && val.length >= 16) || 'wajib 16 karakter',
+                ]"
+              />
+            </div>
+            <div class="col-md-6 col-xs-12">
+              <app-input
+                v-model="store.form.nilai_toefl"
+                valid
+                label="Nilai TOEFL"
+                outlined
+              />
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <q-select
+                v-model="store.form.status_kepegawaian"
+                :options="store.status_kepegawaians"
+                label="Pilih Status Kepegawaian"
+                dense
+                outlined
+                hide-bottom-space
+                no-error-icon
+                lazy-rules
+                :rules="[(val) => (val && val.length > 0) || 'Harap diisi']"
+              />
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <q-select
+                v-model="store.form.bidang_survei"
+                :options="store.bidang_surveis"
+                label="Pilih Bidang Survei"
+                dense
+                outlined
+                hide-bottom-space
+                no-error-icon
+                lazy-rules
+                :rules="[(val) => (val && val.length > 0) || 'Harap diisi']"
+              />
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <q-select
+                v-model="store.form.profesi"
+                :options="store.profesis"
+                label="Pilih Provesi"
+                dense
+                outlined
+                hide-bottom-space
+                no-error-icon
+                lazy-rules
+                :rules="[(val) => (val && val.length > 0) || 'Harap diisi']"
+              />
+            </div>
+            <div class="col-md-12 col-xs-12">
+              <app-input
+                v-model="store.form.domil_alamat"
+                outlined
+                label="Alamat Domisili"
+              />
+            </div>
+            <div class="col-md-6 col-xs-12">
+              <app-autocomplete
+                v-model="store.form.domil_provinsi"
+                outlined
+                label="Provinsi Domisili"
+                autocomplete="name"
+                :source="store.domil_provinces"
+                option-label="name"
+                option-value="name"
+                @set-model="store.domil_getKota"
+              />
+            </div>
+            <div class="col-md-6 col-xs-12">
+              <app-autocomplete
+                v-model="store.form.domil_kabkot"
                 outlined
                 valid
+                label="Kabupaten / Kota Domisili"
+                autocomplete="name"
+                :source="store.domil_kotas"
+                :disable="store.domil_kotas.length===0 "
+                option-label="name"
+                option-value="name"
+                @set-model="store.domil_getKec"
+              />
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <app-autocomplete
+                v-model="store.form.domil_kecamatan"
+                outlined
+                valid
+                label="Kecamatan"
+                autocomplete="name"
+                :source="store.domil_kecs"
+                :disable="store.domil_kecs.length===0"
+                option-label="name"
+                option-value="name"
+                @set-model="store.domil_getKels"
+              />
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <app-autocomplete
+                v-model="store.form.domil_kelurahan"
+                outlined
+                valid
+                label="Kelurahan"
+                autocomplete="name"
+                :source="store.domil_kels"
+                :disable="store.domil_kecs.length===0 "
+                option-label="name"
+                option-value="name"
+              />
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <app-input
+                v-model="store.form.domil_kodepos"
+                outlined
+                label="Kode Pos"
               />
             </div>
           </div>
@@ -167,7 +344,7 @@ store.getProvinces()
 store.setToday()
 const formReff = ref(null)
 const onSubmit = () => {
-  store.saveForm().then(() => {
+  store.saveFormTable().then(() => {
     // console.log('form', formReff)
     formReff.value.resetValidation()
   })

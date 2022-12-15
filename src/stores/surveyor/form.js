@@ -337,6 +337,22 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
         this.loading = false
       }
     },
+
+    async saveFormTable() {
+      this.loading = true
+      try {
+        const resp = await api.post('/v1/surveyor/store', this.form)
+        notifSuccess(resp)
+        this.setOpen()
+        const table = useSurveyorTable()
+        table.getDataTable()
+        this.resetFORM()
+        this.loading = false
+      } catch (error) {
+        this.loading = false
+      }
+    },
+
     async saveProfil(data) {
       const id = this.user
       console.log('id', this.user)
@@ -363,12 +379,12 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
     resetFORM () {
       this.form = {}
       const columns = [
-        'user_id', 'photo', 'tempat_lahir', 'tanggal_lahir',
+        'id', 'nama_lengkap', 'email', 'nik', 'user_id', 'photo', 'tempat_lahir', 'tanggal_lahir',
         'gender', 'agama', 'no_hp1', 'no_hp2',
         'nama_npwp', 'nama_bank', 'no_rekening',
         'nama_buku_tabungan', 'no_asuransi_bpjs', 'nilai_toefl', 'bidang_survei', 'status_kepegawaian',
         'profesi', 'alamat', 'provinsi', 'kabkot', 'kecamatan', 'kelurahan', 'kodepos', 'domil_alamat', 'domil_provinsi',
-        'domil_kabkot', 'domil_kecamatan', 'domil_kelurahan', 'domil_kodepos', 'nama_lengkap', 'email', 'nik']
+        'domil_kabkot', 'domil_kecamatan', 'domil_kelurahan', 'domil_kodepos']
       for (let i = 0; i < columns.length; i++) {
         this.setForm(columns[i], '')
       }

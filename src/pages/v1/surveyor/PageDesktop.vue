@@ -38,10 +38,10 @@
                 {{ row.status === 1 ? 'Butuh konfirmasi' : row.status === 2 ? 'Profil kurang' : row.status === 3 ? 'Profil lengkap' : '' }}
               </div>
             </template>
-            <!-- <template #col-name>
-                <div>Nama</div>
-              </template>
-              <template #col-gender>
+            <template #col-nama_lengkap>
+              <div>Nama</div>
+            </template>
+            <!-- <template #col-gender>
                 <div>L/P</div>
               </template> -->
             <!-- ini untuk ubah storeat cellnya -->
