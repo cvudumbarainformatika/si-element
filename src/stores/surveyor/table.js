@@ -22,8 +22,8 @@ export const useSurveyorTable = defineStore('surveyor_table', {
       'id', 'user_id', 'photo', 'tempat_lahir', 'tanggal_lahir',
       'gender', 'agama', 'no_hp1', 'no_hp2',
       'nama_npwp', 'nama_bank', 'no_rekening',
-      'nama_buku_tabungan', 'no_asuransi_bpjs', 'nilai_toefl', 'bidang_survei', 'status_kepegawaian',
-      'profesi', 'alamat', 'provinsi', 'kabkot', 'kecamatan', 'kelurahan', 'kodepos', 'domil_alamat', 'domil_provinsi',
+      'nama_buku_tabungan', 'no_asuransi_bpjs', 'nilai_toefl', 'bivei_id', 'stawai_id',
+      'profesi_id', 'alamat', 'provinsi', 'kabkot', 'kecamatan', 'kelurahan', 'kodepos', 'domil_alamat', 'domil_provinsi',
       'domil_kabkot', 'domil_kecamatan', 'domil_kelurahan', 'domil_kodepos', 'created_at', 'updated_at']
   }),
 

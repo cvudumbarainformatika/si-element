@@ -32,9 +32,9 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
       nama_buku_tabungan: '',
       no_asuransi_bpjs: '',
       nilai_toefl: '',
-      bidang_survei: '',
-      status_kepegawaian: '',
-      profesi: '',
+      bivei_id: '',
+      stawai_id: '',
+      profesi_id: '',
       alamat: '',
       provinsi: '',
       kabkot: '',
@@ -59,7 +59,7 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
     domil_kecs: [],
     domil_kels: [],
     agamas: ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha', 'Konghucu', 'Lainnya'],
-    bidang_surveis: ['admen', 'UKM', 'UKP'],
+    bidang_surveis: [],
     status_kepegawaians: ['ASN', 'SWASTA', 'Purna Tugas'],
     profesis: ['Dokter', 'Dokter Gigi', 'SKM', 'Bidan', 'Perawat', 'Lainnya'],
     genders: [
@@ -231,6 +231,24 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
       }
       this.loadingSelect = false
     },
+
+    async getBidangSurvei() {
+      await api.get('/v1/bidangsurvei/data')
+        .then((resp) => {
+          // console.log('biadang survei', resp.data)
+          this.bidang_surveis = resp.data
+          // Object.keys(resp.data).forEach((key, index) => {
+          //   console.log(key, resp.data[key].nama)
+          //   const bidang = resp.data[key].nama
+          //   this.bidang_surveis = [bidang]
+          // })
+
+          // return resp.data.nama
+        }).catch(err => {
+          console.log(err)
+        })
+    },
+
     setToday () {
       const date = new Date()
       const year = date.getFullYear()
@@ -315,6 +333,7 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
       }
     },
 
+    // simpan verifikasi surveyor
     async saveForm(data) {
       const id = this.user
       console.log('id', this.user)
@@ -338,6 +357,7 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
       }
     },
 
+    // simpan edit table surveyor
     async saveFormTable() {
       this.loading = true
       try {
@@ -382,8 +402,8 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
         'id', 'nama_lengkap', 'email', 'nik', 'user_id', 'photo', 'tempat_lahir', 'tanggal_lahir',
         'gender', 'agama', 'no_hp1', 'no_hp2',
         'nama_npwp', 'nama_bank', 'no_rekening',
-        'nama_buku_tabungan', 'no_asuransi_bpjs', 'nilai_toefl', 'bidang_survei', 'status_kepegawaian',
-        'profesi', 'alamat', 'provinsi', 'kabkot', 'kecamatan', 'kelurahan', 'kodepos', 'domil_alamat', 'domil_provinsi',
+        'nama_buku_tabungan', 'no_asuransi_bpjs', 'nilai_toefl', 'bivei_id', 'stawai_id',
+        'profesi_id', 'alamat', 'provinsi', 'kabkot', 'kecamatan', 'kelurahan', 'kodepos', 'domil_alamat', 'domil_provinsi',
         'domil_kabkot', 'domil_kecamatan', 'domil_kelurahan', 'domil_kodepos']
       for (let i = 0; i < columns.length; i++) {
         this.setForm(columns[i], '')

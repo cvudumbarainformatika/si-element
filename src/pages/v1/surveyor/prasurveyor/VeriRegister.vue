@@ -262,23 +262,21 @@
               </div>
               <div class="row ">
                 <div class="col q-gutter-xs q-px-xs ">
-                  <q-select
-                    v-model="store.form.bidang_survei"
-                    :options="store.bidang_surveis"
-                    label="Pilih Bidang Survei"
-                    dense
+                  <app-autocomplete
+                    v-model="store.form.bivei_id"
                     outlined
-                    hide-bottom-space
-                    no-error-icon
-                    lazy-rules
-                    :rules="[(val) => (val && val.length > 0) || 'Harap diisi']"
+                    label="Bidang Survei"
+                    autocomplete="nama"
+                    :source="store.bidang_surveis"
+                    option-label="nama"
+                    option-value="id"
                   />
                 </div>
                 <div class="col q-gutter-xs q-px-xs ">
                   <q-select
                     v-model="store.form.profesi"
                     :options="store.profesis"
-                    label="Pilih Provesi"
+                    label="Provesi"
                     dense
                     outlined
                     hide-bottom-space
@@ -447,6 +445,7 @@ const error = ref(false)
 store.getProvinces()
 store.domil_getProvinces()
 store.setToday()
+store.getBidangSurvei()
 function lanjut() {
   store.duplikatData()
 }
