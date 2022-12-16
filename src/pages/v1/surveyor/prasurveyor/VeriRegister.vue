@@ -187,16 +187,14 @@
                   />
                 </div>
                 <div class="col q-gutter-xs q-px-xs">
-                  <q-select
-                    v-model="store.form.status_kepegawaian"
-                    :options="store.status_kepegawaians"
-                    label="Pilih Status Kepegawaian"
-                    dense
+                  <app-autocomplete
+                    v-model="store.form.stawai_id"
                     outlined
-                    hide-bottom-space
-                    no-error-icon
-                    lazy-rules
-                    :rules="[(val) => (val && val.length > 0) || 'Harap diisi']"
+                    label="Status Kepeawaian"
+                    autocomplete="nama"
+                    :source="store.status_kepegawaians"
+                    option-label="nama"
+                    option-value="id"
                   />
                 </div>
               </div>
@@ -273,16 +271,14 @@
                   />
                 </div>
                 <div class="col q-gutter-xs q-px-xs ">
-                  <q-select
-                    v-model="store.form.profesi"
-                    :options="store.profesis"
-                    label="Provesi"
-                    dense
+                  <app-autocomplete
+                    v-model="store.form.profesi_id"
                     outlined
-                    hide-bottom-space
-                    no-error-icon
-                    lazy-rules
-                    :rules="[(val) => (val && val.length > 0) || 'Harap diisi']"
+                    label="Provesi"
+                    autocomplete="nama"
+                    :source="store.profesis"
+                    option-label="nama"
+                    option-value="id"
                   />
                 </div>
               </div>
@@ -442,10 +438,14 @@ const store = useSurveyorFormStore()
 const storeAuth = useAuthStore()
 const error = ref(false)
 
+// get options
 store.getProvinces()
 store.domil_getProvinces()
 store.setToday()
 store.getBidangSurvei()
+store.getStatusKP()
+store.getProvesi()
+
 function lanjut() {
   store.duplikatData()
 }

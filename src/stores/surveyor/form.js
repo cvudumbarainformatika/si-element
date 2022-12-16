@@ -60,8 +60,8 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
     domil_kels: [],
     agamas: ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha', 'Konghucu', 'Lainnya'],
     bidang_surveis: [],
-    status_kepegawaians: ['ASN', 'SWASTA', 'Purna Tugas'],
-    profesis: ['Dokter', 'Dokter Gigi', 'SKM', 'Bidan', 'Perawat', 'Lainnya'],
+    status_kepegawaians: [],
+    profesis: [],
     genders: [
       {
         id: 'L',
@@ -235,15 +235,23 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
     async getBidangSurvei() {
       await api.get('/v1/bidangsurvei/data')
         .then((resp) => {
-          // console.log('biadang survei', resp.data)
           this.bidang_surveis = resp.data
-          // Object.keys(resp.data).forEach((key, index) => {
-          //   console.log(key, resp.data[key].nama)
-          //   const bidang = resp.data[key].nama
-          //   this.bidang_surveis = [bidang]
-          // })
-
-          // return resp.data.nama
+        }).catch(err => {
+          console.log(err)
+        })
+    },
+    async getStatusKP() {
+      await api.get('v1/statusKp/data')
+        .then((resp) => {
+          this.status_kepegawaians = resp.data
+        }).catch(err => {
+          console.log(err)
+        })
+    },
+    async getProvesi() {
+      await api.get('v1/provesi/data')
+        .then((resp) => {
+          this.profesis = resp.data
         }).catch(err => {
           console.log(err)
         })

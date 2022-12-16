@@ -260,17 +260,15 @@
                     />
                   </div>
                   <div class="col-6 q-gutter-y-sm ">
-                    <q-select
-                      v-model="store.form.status_kepegawaian"
-                      :options="store.status_kepegawaians"
-                      :readonly="!store.edited"
-                      label="Pilih Status Kepegawaian"
-                      dense
+                    <app-autocomplete
+                      v-model="store.form.stawai_id"
                       outlined
-                      hide-bottom-space
-                      no-error-icon
-                      lazy-rules
-                      :rules="[(val) => (val && val.length > 0) || 'Harap diisi']"
+                      label="Status Kepeawaian"
+                      :readonly="!store.edited"
+                      autocomplete="nama"
+                      :source="store.status_kepegawaians"
+                      option-label="nama"
+                      option-value="id"
                     />
                   </div>
                 </div>
@@ -342,31 +340,27 @@
                 </div>
                 <div class="row q-gutter-y-sm">
                   <div class="col-6 q-gutter-y-sm q-pr-xs ">
-                    <q-select
-                      v-model="store.form.bidang_survei"
-                      :options="store.bidang_surveis"
+                    <app-autocomplete
+                      v-model="store.form.bivei_id"
                       :readonly="!store.edited"
-                      label="Pilih Bidang Survei"
-                      dense
                       outlined
-                      hide-bottom-space
-                      no-error-icon
-                      lazy-rules
-                      :rules="[(val) => (val && val.length > 0) || 'Harap diisi']"
+                      label="Bidang Survei"
+                      autocomplete="nama"
+                      :source="store.bidang_surveis"
+                      option-label="nama"
+                      option-value="id"
                     />
                   </div>
                   <div class="col-6 q-gutter-y-sm ">
-                    <q-select
-                      v-model="store.form.profesi"
-                      :options="store.profesis"
+                    <app-autocomplete
+                      v-model="store.form.profesi_id"
                       :readonly="!store.edited"
-                      label="Pilih Provesi"
-                      dense
                       outlined
-                      hide-bottom-space
-                      no-error-icon
-                      lazy-rules
-                      :rules="[(val) => (val && val.length > 0) || 'Harap diisi']"
+                      label="Provesi"
+                      autocomplete="nama"
+                      :source="store.profesis"
+                      option-label="nama"
+                      option-value="id"
                     />
                   </div>
                 </div>
@@ -563,6 +557,9 @@ watch(() => storeAuth.user, (apem) => {
 store.getProvinces()
 store.domil_getProvinces()
 store.setToday()
+store.getBidangSurvei()
+store.getStatusKP()
+store.getProvesi()
 
 function onSubmit() {
   store.duplikatDataProfil()

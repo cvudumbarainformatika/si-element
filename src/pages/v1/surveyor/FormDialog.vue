@@ -208,42 +208,36 @@
               />
             </div>
             <div class="col-md-4 col-xs-12">
-              <q-select
-                v-model="store.form.status_kepegawaian"
-                :options="store.status_kepegawaians"
-                label="Pilih Status Kepegawaian"
-                dense
+              <app-autocomplete
+                v-model="store.form.stawai_id"
                 outlined
-                hide-bottom-space
-                no-error-icon
-                lazy-rules
-                :rules="[(val) => (val && val.length > 0) || 'Harap diisi']"
+                label="Status Kepeawaian"
+                autocomplete="nama"
+                :source="store.status_kepegawaians"
+                option-label="nama"
+                option-value="id"
               />
             </div>
             <div class="col-md-4 col-xs-12">
-              <q-select
-                v-model="store.form.bidang_survei"
-                :options="store.bidang_surveis"
-                label="Pilih Bidang Survei"
-                dense
+              <app-autocomplete
+                v-model="store.form.bivei_id"
                 outlined
-                hide-bottom-space
-                no-error-icon
-                lazy-rules
-                :rules="[(val) => (val && val.length > 0) || 'Harap diisi']"
+                label="Bidang Survei"
+                autocomplete="nama"
+                :source="store.bidang_surveis"
+                option-label="nama"
+                option-value="id"
               />
             </div>
             <div class="col-md-4 col-xs-12">
-              <q-select
-                v-model="store.form.profesi"
-                :options="store.profesis"
-                label="Pilih Provesi"
-                dense
+              <app-autocomplete
+                v-model="store.form.profesi_id"
                 outlined
-                hide-bottom-space
-                no-error-icon
-                lazy-rules
-                :rules="[(val) => (val && val.length > 0) || 'Harap diisi']"
+                label="Provesi"
+                autocomplete="nama"
+                :source="store.profesis"
+                option-label="nama"
+                option-value="id"
               />
             </div>
             <div class="col-md-12 col-xs-12">
@@ -342,6 +336,9 @@ const store = useSurveyorFormStore()
 
 store.getProvinces()
 store.setToday()
+store.getBidangSurvei()
+store.getStatusKP()
+store.getProvesi()
 const formReff = ref(null)
 const onSubmit = () => {
   store.saveFormTable().then(() => {
