@@ -163,11 +163,14 @@
               />
             </div>
             <div class="col-md-4 col-xs-12">
-              <app-input
+              <app-autocomplete
                 v-model="store.form.nama_bank"
-                valid
-                label="Nama Bank"
                 outlined
+                label="Nama BANK"
+                autocomplete="name"
+                :source="store.master_banks"
+                option-label="name"
+                option-value="name"
               />
             </div>
             <div class="col-md-4 col-xs-12">
@@ -339,6 +342,7 @@ store.setToday()
 store.getBidangSurvei()
 store.getStatusKP()
 store.getProvesi()
+store.getDataBank()
 const formReff = ref(null)
 const onSubmit = () => {
   store.saveFormTable().then(() => {

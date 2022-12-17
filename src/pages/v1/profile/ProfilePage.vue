@@ -291,11 +291,15 @@
                     />
                   </div>
                   <div class="col-4 q-gutter-y-sm q-pl-xs">
-                    <app-input
+                    <app-autocomplete
                       v-model="store.form.nama_bank"
-                      outlined
                       :readonly="!store.edited"
+                      outlined
                       label="Nama BANK"
+                      autocomplete="name"
+                      :source="store.master_banks"
+                      option-label="name"
+                      option-value="name"
                     />
                   </div>
                 </div>
@@ -382,6 +386,7 @@
                     <app-input
                       v-model="store.form.domil_alamat"
                       :readonly="!store.edited"
+                      :disable="store.cekbox===true"
                       outlined
                       label="Alamat Domisili"
                     />
@@ -396,6 +401,7 @@
                       label="Provinsi"
                       autocomplete="name"
                       :source="store.domil_provinces"
+                      :disable="store.cekbox===true"
                       option-label="name"
                       option-value="name"
                       @set-model="store.domil_getKota"
@@ -410,7 +416,7 @@
                       label="Kabupaten / Kota"
                       autocomplete="name"
                       :source="store.domil_kotas"
-                      :disable="store.domil_kotas.length===0"
+                      :disable="store.domil_kotas.length===0 || store.cekbox===true"
                       option-label="name"
                       option-value="name"
                       @set-model="store.domil_getKec"
@@ -427,7 +433,7 @@
                       label="Kecamatan"
                       autocomplete="name"
                       :source="store.domil_kecs"
-                      :disable="store.domil_kecs.length===0 "
+                      :disable="store.domil_kecs.length===0 || store.cekbox===true"
                       option-label="name"
                       option-value="name"
                       @set-model="store.domil_getKels"
@@ -442,7 +448,7 @@
                       label="Kelurahan"
                       autocomplete="name"
                       :source="store.domil_kels"
-                      :disable="store.domil_kecs.length===0 "
+                      :disable="store.domil_kecs.length===0 || store.cekbox===true"
                       option-label="name"
                       option-value="name"
                     />
@@ -451,6 +457,7 @@
                     <app-input
                       v-model="store.form.domil_kodepos"
                       :readonly="!store.edited"
+                      :disable="store.cekbox===true"
                       outlined
                       label="Kode Pos"
                     />
@@ -544,7 +551,7 @@ const fileRef = ref(null)
 const tempImg = ref(null)
 
 const imgUrl = ref(storeAuth.user.photo ? (storageServer + storeAuth.user.photo) : new URL('../../../assets/images/actor.svg', import.meta.url).href)
-console.log('imge name', imgUrl)
+// console.log('imge name', imgUrl)
 watch(() => storeAuth.user, (apem) => {
   // console.log('watch apem', apem)
   if (apem) {
@@ -557,9 +564,8 @@ watch(() => storeAuth.user, (apem) => {
 store.getProvinces()
 store.domil_getProvinces()
 store.setToday()
-store.getBidangSurvei()
-store.getStatusKP()
-store.getProvesi()
+
+store.getDataBank()
 
 function onSubmit() {
   store.duplikatDataProfil()
@@ -587,7 +593,7 @@ const simpanGambar = () => {
     })
       .then(resp => {
         notifSuccess(resp)
-        console.log('image resp', resp)
+        // console.log('image resp', resp)
         storeAuth.getUser()
         tempImg.value = null
         resolve(resp)
@@ -607,6 +613,9 @@ function onReset() {
 onMounted(() => {
   const user = storeAuth.user
   store.cekIdProfil(user)
+  store.getBidangSurvei()
+  store.getStatusKP()
+  store.getProvesi()
 })
 
 </script>

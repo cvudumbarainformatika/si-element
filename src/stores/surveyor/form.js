@@ -62,6 +62,7 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
     bidang_surveis: [],
     status_kepegawaians: [],
     profesis: [],
+    master_banks: [],
     genders: [
       {
         id: 'L',
@@ -83,7 +84,7 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
     async getProvinces (id) {
       await axios.get(`${this.api_wilayah}/provinces.json`)
         .then((resp) => {
-          console.log(resp)
+          // console.log(resp)
           this.provinces = resp.data
           return resp.data.name
         }).catch(err => {
@@ -93,16 +94,16 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
     async getKota (val) {
       this.loadingSelect = true
       if (this.provinces.length > 0) {
-        console.log('jika data array provinsi ada')
+        // console.log('jika data array provinsi ada')
         let temp = []
         temp = this.provinces.filter(v => v.name.toLowerCase() === val.toLowerCase())
         if (temp.length > 0) {
           const tempId = temp[0].id
           await axios.get(`${this.api_wilayah}/regencies/${tempId}.json`)
             .then((resp) => {
-              console.log('resp', resp)
+              // console.log('resp', resp)
               this.kotas = resp.data
-              console.log('kotas', this.kotas)
+              // console.log('kotas', this.kotas)
               this.loadingSelect = false
             }).catch(err => {
               console.log(err)
@@ -115,16 +116,16 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
     async getKec (val) {
       this.loadingSelect = true
       if (this.kotas.length > 0) {
-        console.log('jika data array provinsi ada')
+        // console.log('jika data array provinsi ada')
         let temp = []
         temp = this.kotas.filter(v => v.name.toLowerCase() === val.toLowerCase())
         if (temp.length > 0) {
           const tempId = temp[0].id
           await axios.get(`${this.api_wilayah}/districts/${tempId}.json`)
             .then((resp) => {
-              console.log('resp', resp)
+              // console.log('resp', resp)
               this.kecs = resp.data
-              console.log('kec', this.kecs)
+              // console.log('kec', this.kecs)
               this.loadingSelect = false
             }).catch(err => {
               console.log(err)
@@ -143,10 +144,10 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
           const tempId = temp[0].id
           await axios.get(`${this.api_wilayah}/villages/${tempId}.json`)
             .then((resp) => {
-              console.log('resp', resp)
+              // console.log('resp', resp)
               this.kels = resp.data
               this.loadingSelect = false
-              console.log('kec', this.kels)
+              // console.log('kec', this.kels)
             }).catch(err => {
               console.log(err)
               this.loadingSelect = false
@@ -159,7 +160,7 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
     async domil_getProvinces (id) {
       await axios.get(`${this.domil_api_wilayah}/provinces.json`)
         .then((resp) => {
-          console.log(resp)
+          // console.log(resp)
           this.domil_provinces = resp.data
           return resp.data.name
         }).catch(err => {
@@ -169,16 +170,16 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
     async domil_getKota (val) {
       this.loadingSelect = true
       if (this.domil_provinces.length > 0) {
-        console.log('jika data array provinsi ada')
+        // console.log('jika data array provinsi ada')
         let temp = []
         temp = this.domil_provinces.filter(v => v.name.toLowerCase() === val.toLowerCase())
         if (temp.length > 0) {
           const tempId = temp[0].id
           await axios.get(`${this.domil_api_wilayah}/regencies/${tempId}.json`)
             .then((resp) => {
-              console.log('resp', resp)
+              // console.log('resp', resp)
               this.domil_kotas = resp.data
-              console.log('kotas', this.domil_kotas)
+              // console.log('kotas', this.domil_kotas)
               this.loadingSelect = false
             }).catch(err => {
               console.log(err)
@@ -191,16 +192,16 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
     async domil_getKec (val) {
       this.loadingSelect = true
       if (this.domil_kotas.length > 0) {
-        console.log('jika data array provinsi ada')
+        // console.log('jika data array provinsi ada')
         let temp = []
         temp = this.domil_kotas.filter(v => v.name.toLowerCase() === val.toLowerCase())
         if (temp.length > 0) {
           const tempId = temp[0].id
           await axios.get(`${this.domil_api_wilayah}/districts/${tempId}.json`)
             .then((resp) => {
-              console.log('resp', resp)
+              // console.log('resp', resp)
               this.domil_kecs = resp.data
-              console.log('kec', this.kecs)
+              // console.log('kec', this.kecs)
               this.loadingSelect = false
             }).catch(err => {
               console.log(err)
@@ -219,10 +220,10 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
           const tempId = temp[0].id
           await axios.get(`${this.domil_api_wilayah}/villages/${tempId}.json`)
             .then((resp) => {
-              console.log('resp', resp)
+              // console.log('resp', resp)
               this.domil_kels = resp.data
               this.loadingSelect = false
-              console.log('kec', this.domil_kels)
+              // console.log('kec', this.domil_kels)
             }).catch(err => {
               console.log(err)
               this.loadingSelect = false
@@ -232,28 +233,50 @@ export const useSurveyorFormStore = defineStore('surveyor_form', {
       this.loadingSelect = false
     },
 
+    async getDataBank() {
+      this.loadingSelect = true
+      await axios.get('https://farhandardiri.github.io/gudang-data.github.io/bank/bank.json')
+        .then((resp) => {
+          // console.log('bank data', resp.data)
+          this.master_banks = resp.data
+          this.loadingSelect = false
+        }).catch(err => {
+          console.log(err)
+          this.loadingSelect = false
+        })
+    },
+
     async getBidangSurvei() {
+      this.loadingSelect = true
       await api.get('/v1/bidangsurvei/data')
         .then((resp) => {
           this.bidang_surveis = resp.data
+          this.loadingSelect = false
         }).catch(err => {
           console.log(err)
+          this.loadingSelect = false
         })
     },
     async getStatusKP() {
+      this.loadingSelect = true
       await api.get('v1/statusKp/data')
         .then((resp) => {
           this.status_kepegawaians = resp.data
+          this.loadingSelect = false
         }).catch(err => {
           console.log(err)
+          this.loadingSelect = false
         })
     },
     async getProvesi() {
+      this.loadingSelect = true
       await api.get('v1/provesi/data')
         .then((resp) => {
           this.profesis = resp.data
+          this.loadingSelect = false
         }).catch(err => {
           console.log(err)
+          this.loadingSelect = false
         })
     },
 

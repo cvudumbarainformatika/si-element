@@ -200,10 +200,14 @@
               </div>
               <div class="row">
                 <div class="col q-gutter-xs q-px-xs">
-                  <app-input
+                  <app-autocomplete
                     v-model="store.form.nama_bank"
                     outlined
-                    label="Nama bank"
+                    label="Nama BANK"
+                    autocomplete="name"
+                    :source="store.master_banks"
+                    option-label="name"
+                    option-value="name"
                   />
                 </div>
                 <div class="col q-gutter-xs q-px-xs">
@@ -445,6 +449,7 @@ store.setToday()
 store.getBidangSurvei()
 store.getStatusKP()
 store.getProvesi()
+store.getDataBank()
 
 function lanjut() {
   store.duplikatData()
