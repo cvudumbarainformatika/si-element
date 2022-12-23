@@ -88,7 +88,8 @@ const props = defineProps({
   disable: { type: Boolean, default: false },
   readonly: { type: Boolean, default: false },
   reverseFillMask: { type: Boolean, default: false },
-  errMessage: { type: String, default: 'error, data tidak valid' }
+  errMessage: { type: String, default: 'error, data tidak valid' },
+  aturan: { type: Array, default: () => [] }
 })
 
 const refInput = ref(null)
@@ -98,13 +99,18 @@ onMounted(() => {
   // console.log(refInput.value)
 })
 
-function anotherValid (val) {
+function anotherValid(val) {
+  // console.log('app inout val', !!val, val)
   if (props.valid) {
     return true
   }
   if (props.validator === 'email') {
     const emailPattern = /^(?=[a-zA-Z0-9@._%+-]{6,254}$)[a-zA-Z0-9._%+-]{1,64}@(?:[a-zA-Z0-9-]{1,63}\.){1,8}[a-zA-Z]{2,63}$/
     return emailPattern.test(val) || 'email tidak valid'
+  }
+  if (props.aturan.length) {
+    console.log('aturan', props.aturan)
+    return props.aturan
   }
   return (!!val) || 'Harap diisi'
 }

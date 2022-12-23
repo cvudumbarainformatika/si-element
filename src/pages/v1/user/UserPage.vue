@@ -14,6 +14,7 @@
             :sort="table.params.sort"
             :loading="table.loading"
             :to-search="table.params.q"
+            row-image="image"
             is-new-data
             @set-order="table.setOrder"
             @set-row="table.setPerPage"

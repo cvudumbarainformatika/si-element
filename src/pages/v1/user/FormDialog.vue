@@ -48,12 +48,12 @@
                 lazy-rules
                 :rules="[(val) => (val && val.length > 0) || 'Harap diisi']"
               />
-              <app-input
+              <!-- <app-input
                 v-model="store.form.password"
                 label="Password"
                 type="password"
                 outlined
-              />
+              /> -->
             </div>
           </div>
           <q-separator class="q-my-md" />

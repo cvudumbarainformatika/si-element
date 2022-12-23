@@ -1,5 +1,5 @@
 <template>
-  <q-dialog>
+  <q-dialog persistent>
     <app-card
       class="my-card"
       title="Form Surveyor"
@@ -17,7 +17,6 @@
                 v-model="store.form.nik"
                 label="Nik*"
                 outlined
-                :disable="store.edited"
               />
             </div>
             <div class="col-md-6 col-xs-12">
@@ -190,13 +189,27 @@
               />
             </div>
             <div class="col-md-6 col-xs-12">
+              <!-- <q-input
+                v-model="store.form.no_asuransi_bpjs"
+                type="number"
+                outlined
+                dense
+                label="Nomor Asuransi BPJS"
+                bottom-slots
+                hint="Wajib 16 Karakter"
+                :error="!isValid"
+              >
+                <template #error>
+                  Please use maximum 16 characters.
+                </template>
+              </q-input> -->
               <app-input
                 v-model="store.form.no_asuransi_bpjs"
                 type="number"
                 outlined
                 label="Nomor asuransi BPJS"
-                lazy-rules
-                :rules="[
+
+                :aturan="[
                   (val) => (val !== null && val !== '') || 'Harap diisi',
                   (val) => (val.length <= 16 && val.length >= 16) || 'wajib 16 karakter',
                 ]"
@@ -345,16 +358,25 @@ store.getProvesi()
 store.getDataBank()
 const formReff = ref(null)
 const onSubmit = () => {
+  // if (isValid.value === true) {
   store.saveFormTable().then(() => {
     // console.log('form', formReff)
     formReff.value.resetValidation()
+    // })
   })
+  // isValid.value = true
+  // console.log('valid', isValid)
 }
 
 const onReset = () => {
   formReff.value.resetValidation()
   store.setOpen()
 }
+
+// const isValid = computed(() => {
+//   // console.log('no asuansi', store.form.no_asuransi_bpjs)
+//   return store.form.no_asuransi_bpjs.length <= 16 && store.form.no_asuransi_bpjs.length >= 16
+// })
 
 </script>
 

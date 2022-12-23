@@ -9,7 +9,7 @@ export const useUserForm = defineStore('user_form', {
     form: {
       name: '',
       email: '',
-      password: '',
+      // password: '',
       role: 'admin',
       status: 'aktif'
     },
@@ -50,6 +50,7 @@ export const useUserForm = defineStore('user_form', {
         const resp = await api.post('/v1/user/store', this.form)
         console.log('simpan data', resp)
         notifSuccess(resp)
+        this.setOpen()
         const table = useUserTable()
         table.getDataTable()
         this.resetFORM()
@@ -64,12 +65,13 @@ export const useUserForm = defineStore('user_form', {
 
     editData(val) {
       console.log('editdata', val)
-      this.editData = true
       const keys = Object.keys(val)
       keys.forEach((key, index) => {
         this.setForm(key, val[key])
       })
+      // kecuali yang ada di object user
       this.isOpen = !this.isOpen
+      console.log('open', this.isOpen)
     }
   }
 })
